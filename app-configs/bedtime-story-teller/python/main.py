@@ -71,9 +71,7 @@ def generate_story(_, data):
 
         prompt_for_display += f" The story type is <strong>{theme}</strong>. The tone should be <strong>{tone}</strong>. The format should be a narrative-style story with a clear beginning, middle, and end, allowing for a smooth and engaging reading experience. The objective is to entertain and soothe the child before bedtime. Provide a brief introduction to set the scene and introduce the main character. The scope should revolve around the topic: managing emotions and conflicts. The length should be approximately <strong>{duration}</strong>. Please ensure the story has a <strong>{narrative_structure}</strong> narrative structure, leaving the child with a sense of <strong>{ending_type}</strong>. The language should be easy to understand and suitable for my child's age comprehension."
         if other:
-            prompt_for_display += f"
-
-Other on optional stuff for the story: <strong>{other}</strong>"
+            prompt_for_display += f"Other optional stuff for the story: <strong>{other}</strong>"
 
         prompt_for_llm = re.sub('<[^>]*>', '', prompt_for_display)
 

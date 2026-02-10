@@ -25,7 +25,7 @@ What is still manual:
 a) Install Arduino App Lab on your PC:
    - https://www.arduino.cc/en/software/#app-lab-section
 
-   <img src="images/app-lab-downlowad.png" alt="App Lab download page" width="700">
+   <img src="images/app-lab-download.png" alt="App Lab download page" width="700">
 
 b) Connect the UNO Q to your PC with a USB cable.
 
@@ -65,7 +65,7 @@ c) Use the SCP commands below to push the files to the UNO Q.
 ```bash
 cd /home/arduino
 
-git clone https://github.com/mlamp99/iotc-arduino-uno-q-workshop
+git clone https://github.com/avnet-iotconnect/iotc-arduino-uno-q-workshop.git
 cd iotc-arduino-uno-q-workshop
 
 chmod +x scripts/*.sh

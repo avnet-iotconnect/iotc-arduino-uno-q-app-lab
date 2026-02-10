@@ -14,8 +14,6 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
 
-App Lab folder: `/home/arduino/ArduinoApps/home-climate-monitoring-and-storage`
-
 App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 
 ## Files

@@ -105,7 +105,7 @@ def on_run_classification(sid, data):
             if results:
                 response_data['classification'] = { 'class_name': results["class_name"], 'confidence': results["confidence"] }
             else:
-                response_data['error'] = "No objects detected in the audio. Try to lower the confidence threshold."
+                response_data['error'] = "No sounds detected in the audio. Try to lower the confidence threshold."
 
             ui.send_message('classification_complete', response_data, sid)
 
