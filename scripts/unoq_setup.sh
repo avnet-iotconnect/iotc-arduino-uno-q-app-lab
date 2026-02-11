@@ -59,11 +59,10 @@ if [[ ! -f "$DEMO_DIR/iotc_relay_client.py" ]]; then
   fetch_file "$RELAY_CLIENT_URL" "$DEMO_DIR/iotc_relay_client.py"
 fi
 
-# Install the TCP-enabled relay client from the workshop repo into site-packages
-# so every App Lab app can "from iotc_relay_client import ..." without a local copy.
-REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+# Install the relay client into site-packages so every App Lab app can
+# "from iotc_relay_client import ..." without needing a local copy.
 SITE_PACKAGES="$(python3 -c 'import site; print(site.getsitepackages()[0])')"
-cp "$REPO_DIR/app-lab/iotc_relay_client.py" "$SITE_PACKAGES/iotc_relay_client.py"
+cp "$DEMO_DIR/iotc_relay_client.py" "$SITE_PACKAGES/iotc_relay_client.py"
 echo "Installed iotc_relay_client.py -> $SITE_PACKAGES"
 
 chmod +x "$DEMO_DIR/iotc-relay-server.py"
