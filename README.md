@@ -1,66 +1,46 @@
 # Arduino UNO Q App Lab Examples on /IOTCONNECT
 
-This README describes the automated path for the customer lab. The scripts run on the UNO Q host OS. 
-Participants will use their host machine for account creation, certificates, and shell access.
+This guide provides step-by-step instructions to set up the Arduino Uno Q hardware and integrate it with /IOTCONNECT,
+Avnet's robust IoT platform to run IoT-connected Arduino App Lab demos.
 
-What is automated on the UNO Q:
-- IOTCONNECT Python Lite SDK install
-- Relay server and client download (the relay server has a built-in TCP listener for container access)
-- systemd service for the relay server
-- App Lab project patch (copy relay client + insert init block)
-- Health checks
+1. [Install Arduino App Lab on Host Machine](#1-install-arduino-app-lab-on-host-machine)
+2. [Clone This Repo Onto Your Arduino UNO Q](#2-clone-this-repo-onto-your-arduino-uno-q)
+3. [Onboard Arduino into /IOTCONNECT](#3-onboard-arduino-into-iotconnect)
+4. [Set Up /IOTCONNECT SDK and Relay Service](#4-set-up-iotconnect-sdk-and-relay-service)
+5. [Choose a Lab Example, Clone It, and Copy the IOTCONNECT Files](#5-choose-a-lab-example-clone-it-and-copy-the-iotconnect-files)
+6. [Run the App and Confirm Telemetry](#6-run-the-app-and-confirm-telemetry)
 
-What is still manual:
-- IOTCONNECT account/device creation
-- Downloading device certs and config from IOTCONNECT
-- Arduino App Lab installation
-- Android tools (ADB) installation on the laptop
+## 1. Install Arduino App Lab on Host Machine
 
----
-
-## Prerequisites
-
-### Install Arduino App Lab on Host Machine
-
-a) Install Arduino App Lab on your PC:
+First, install Arduino App Lab on your PC:
    - https://www.arduino.cc/en/software/#app-lab-section
 
    <img src="images/app-lab-download.png" alt="App Lab download page" width="700">
 
-b) Connect the UNO Q to your PC with a USB cable.
+Then, connect the UNO Q to your PC with a USB cable.
 
    <img src="images/app-lab-connect.png" alt="Connect to board" width="300">
 
-c) Enter your Wi-Fi credentials and set up connectivity.
+Next, enter your Wi-Fi credentials and set up connectivity.
 
    <img src="images/app-lab-2-network.png" alt="Enter network credentials" width="300">
 
-d) Update the board when prompted.
+Update the board when prompted.
 
    <img src="images/app-lab-4-install-updates.png" alt="Install updates" width="300">
 
-e) Restart the board.
+Now, restart the board.
  
-f) In App Lab, open Examples to view all available apps.
+Then, in **App Lab**, open **Examples** to view all available apps.
 
-g) Open the App Lab terminal (used to access the Uno Q terminal).
+Finally, open the **App Lab terminal** (used to access the Uno Q terminal).
 
    <img src="images/app-lab-8-openterminal.png" alt="Open terminal" width="400">
 
-### Create IOTCONNECT Device and Gather Device Credentials
 
-a) Create the IOTCONNECT device.
-b) Download the device configuration files to the host machine:
-   - `iotcDeviceConfig.json`
-   - `device-cert.pem`
-   - `device-pkey.pem`
-   Note: the downloaded cert files will include the device name (for example, `cert_unoQ.crt` and `key_unoQ2.key`).
-   The setup script will copy them to `device-cert.pem` and `device-pkey.pem` automatically.
-c) Use the SCP commands below to push the files to the UNO Q.
+## 2. Clone This Repo Onto Your Arduino UNO Q
 
----
-
-## Step 1: Clone this repo on the UNO Q
+Run these commands to clone this repository onto your Arduino to get access to the automation scripts and App Lab code: 
 
 ```bash
 cd /home/arduino
@@ -71,75 +51,90 @@ cd iotc-arduino-uno-q-workshop
 chmod +x scripts/*.sh
 ```
 
----
 
-## Step 2: Transfer Device Credentials to the UNO Q 
+## 3. Onboard Arduino into /IOTCONNECT
 
-### a) Get the UNO Q IP address
+Next you will need to onboard your device into /IOTCONNECT. This will be done via the online /IOTCONNECT user interface in 
+conjunction with an automated bash script. Follow these steps to complete the process:
 
-On the UNO Q terminal:
+1. In a web browser, navigate to console.iotconnect.io and log into your account.
 
-```bash
-hostname -I
+2. In the blue toolbar on the left edge of the page, hover over the "processor" icon and then in the resulting dropdown
+   select "Device".
+
+3. Now in the resulting Device page, click on the "Templates" tab of the blue toolbar at the bottom of the screen.
+
+4. Right-click and then click "save link as" on [this link to the Arduino Uno Q App Lab device template](https://raw.githubusercontent.com/avnet-iotconnect/iotc-arduino-uno-q-workshop/refs/heads/main/app-configs/templates/arduino-app-lab-template.json)
+   to download the raw template file to your PC.
+
+5. Back in the /IOTCONNECT browser tab, click on the "Create Template" button in the top-right of the screen.
+
+6. Click on the "Import" button in the top-right of the resulting screen.
+
+7. Select your downloaded copy of the template from sub-step 4 and then click "save".
+
+8. Click on the "Devices" tab of the blue toolbar at the bottom of the screen.
+
+9. In the resulting page, click on the "Create Device" button in the top-right of the screen.
+
+10. Customize the "Unique ID" and "Device Name" fields to your needs (both fields should be identical though).
+
+11. Select the most appropriate option for your device from the "Entity" dropdown (only for organization, does not
+    affect connectivity).
+
+12. Select "arduino-app-lab" from the "Template" dropdown.
+
+13. In the resulting "Device Certificate" field, select "Use my certificate." Leave this page as-is for now, you will finish it later.
+
+14. Swapping over to the terminal of your Arduino, navigate to the `scripts` directory of the repo using this command:
+
+```
+cd /home/arduino/iotc-arduino-uno-q-workshop/scripts
 ```
 
-If you see more than one IP, use the last one listed (example: `10.50.0.199`). Ignore `172.17.0.1` (that is the App Lab container bridge).
+15. Execute the automated device credentials script with this command:
 
-### b) Copy certs from Windows to the UNO Q
-
-Run these commands on the Windows laptop after you download the IOTCONNECT files.
-
-```powershell
-# 1) Send the config JSON from Downloads
-cd Downloads
-scp iotcDeviceConfig.json arduino@<UNOQ_IP>:/tmp/
-
-# 2) Send all files from the extracted certs folder
-# (folder name varies by device, so use the extracted *certificates* folder)
-cd Downloads\*certificates*
-scp * arduino@<UNOQ_IP>:/tmp/
+```
+bash ./credentials.sh
 ```
 
----
+16. When prompted, press ENTER to have the script print out the generated device certificate.
 
-## Step 3: Run the automated host setup (if you have not already)
+17. Copy the device certificate text (including BEGIN and END lines) and paste the text into the certificate box in the /IOTCONNECT device creation page.  
 
-This installs the IOTCONNECT Python Lite SDK, downloads the relay server + client, and sets up the systemd service.
+18. Click the "Save and View" button to go to the page for your new device.
+
+19. Now on your device's page in /IOTCONNECT, click on the black/white/green paper-and-cog icon in the top-right of the
+    device page (just above "Connection Info") to download your device's configuration file.
+
+20. Open the configuration file in a text editor and copy its entirety to your clipboard.
+
+21. Back in the terminal of your Arduino, paste the contents of the configuration file from your clipboard as instructed by the next step
+    of the script, and then press ENTER.
+
+22. The onboarding process is complete. 
+
+
+## 4. Set Up /IOTCONNECT SDK and Relay Service
+
+Run these commands to install the /IOTCONNECT Python Lite SDK and then download and configure the /IOTCONNECT Relay Service.
 
 ```bash
 cd /home/arduino/iotc-arduino-uno-q-workshop
 sudo ./scripts/unoq_setup.sh --demo-dir /home/arduino/demo
 ```
-Optional flags:
-- `--no-systemd` (skip service install/start)
-- `--skip-apt` (skip apt install step)
-- `--skip-sdk` (skip IOTCONNECT Python Lite SDK install)
-- `--no-rename-certs` (skip renaming cert/key files in the demo dir)
-- `--pip-break-system-packages` (default; allow pip to install system-wide packages on Debian)
 
----
-
-## Step 4: Verify the host setup
-
-```bash
-./scripts/unoq_verify.sh --demo-dir /home/arduino/demo
-```
-
-You should see:
-- IOTCONNECT Lite SDK import check ok
-- Relay socket present: `/tmp/iotconnect-relay.sock`
-- Relay TCP listener on port 8899
-
----
-
-## Step 5: Choose and clone a lab example in App Lab
+## 5. Choose a Lab Example, Clone It, and Copy the IOTCONNECT Files
 
 In Arduino App Lab:
 1) Browse examples from `app-bricks-examples`.
 2) Copy the selected app into your workspace.
 3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-on-led-matrix`).
 4) Open the matching guide in `app-configs/<example>/README.md`.
-5) Use the placeholder template in `app-configs/<example>/device-template.json` and fill in telemetry + commands for your lab. If you want a single all-in-one template, start from `app-configs/superset/device-template.json` and delete the fields you do not need.
+5) Copy the IOTCONNECT-enabled python files from the workshop repo into the app:
+   ```bash
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<app-folder>/python/
+   ```
 
 ### Examples Index
 
@@ -172,31 +167,7 @@ Use these IOTCONNECT-specific guides:
 
 ---
 
-## Step 6: Patch the App Lab project for IOTCONNECT
-
-This copies the patched relay client into the app. If a pre-patched `main.py` exists in
-`app-configs/<example>/python/main.py`, it will overwrite your app’s `python/main.py`.
-
-```bash
-./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/air-quality-on-led-matrix air-quality-monitoring
-```
-
-If your App Lab folder name differs from the example name, pass it explicitly:
-
-```bash
-./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/my-air-quality air-quality-monitoring
-```
-
-After patching, open `python/main.py` and add telemetry calls where your app produces data:
-
-```python
-# Example
-IOTC_SEND({"temp_c": temp_c, "humidity": humidity})
-```
-
----
-
-## Step 7: Run the app and confirm telemetry
+## 6. Run the App and Confirm Telemetry
 
 1) Run the app in App Lab.
 2) Confirm telemetry appears in IOTCONNECT.
@@ -204,51 +175,20 @@ IOTC_SEND({"temp_c": temp_c, "humidity": humidity})
 
 Expected result: the selected App Lab example runs on the UNO Q and publishes telemetry to IOTCONNECT.
 
----
-
-## Scripts
-
-- `scripts/unoq_setup.sh`
-  - Downloads relay server and client into `/home/arduino/demo`
-  - Configures and starts the systemd service
-
-- `scripts/unoq_patch_app.sh <app_dir>`
-  - Copies `app-lab/iotc_relay_client.py` into `<app_dir>/python/`
-  - Inserts a minimal IOTCONNECT init block into `<app_dir>/python/main.py`
-  - Reads `app-configs/<example>/config.json` if present and prints telemetry/command hints
-
-- `scripts/unoq_verify.sh`
-  - Verifies SDK import, relay socket, and TCP port
-
----
-
-## Troubleshooting
-
-- If App Lab cannot connect, confirm the relay server is listening on port 8899:
-  `ss -ltnp | grep 8899`
-- If the relay socket is missing, restart the relay service:
-  `sudo systemctl restart iotc-relay`
-- If systemd is not available, run manually:
-  - `python3 /home/arduino/demo/iotc-relay-server.py`
-
----
-
-## Service control (manual start/stop)
-
-To disconnect your device from IOTCONNECT, stop the relay service:
-
-```bash
-sudo systemctl stop iotc-relay
-```
-
-To start it again:
-
-```bash
-sudo systemctl start iotc-relay
-```
-
-To restart:
-
-```bash
-sudo systemctl restart iotc-relay
-```
+> [!TIP]
+> You can manually manage the /IOTCONNECT Relay Service on your device.
+>
+> To disconnect your device from IOTCONNECT, stop the relay service:
+> ```bash
+> sudo systemctl stop iotc-relay
+> ```
+>
+> To start it again:
+> ```bash
+> sudo systemctl start iotc-relay
+> ```
+>
+> To restart:
+> ```bash
+> sudo systemctl restart iotc-relay
+> ```

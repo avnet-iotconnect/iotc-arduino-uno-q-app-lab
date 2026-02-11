@@ -18,12 +18,12 @@ App Lab folder: `/home/arduino/ArduinoApps/mascot-jump-game`
 
 ## Files
 - `python/main.py` (IOTCONNECT-enabled app code)
-- `device-template.json` (IOTCONNECT device template)
 - `config.json` (telemetry/command definitions)
 
 ## Device Template
-- Template code: `UnoQMJG`
-- Template name: `UnoQMascotJumpGame`
+This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
+- Template code: `arduino`
+- Template name: `arduino`
 
 ## Telemetry Fields
 | Field | Type |
@@ -44,14 +44,14 @@ App Lab folder: `/home/arduino/ArduinoApps/mascot-jump-game`
 
 ## How to use in App Lab
 1) Copy the example into your App Lab workspace.
-2) Run the patcher from the workshop repo:
+2) Copy the IOTCONNECT-enabled python files into the app:
    ```bash
-   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/mascot-jump-game mascot-jump-game
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/mascot-jump-game/python/* /home/arduino/ArduinoApps/mascot-jump-game/python/
    ```
 3) Run the app and verify telemetry in IOTCONNECT.
 
 ## IOTCONNECT setup checklist
-- Create or select the device template using the fields above.
+- Use the shared device template (`app-configs/arduino-app-lab-template.json`) or create one with the telemetry fields listed above.
 - Create a device bound to that template.
 - Download `iotcDeviceConfig.json`, `device-cert.pem`, and `device-pkey.pem`.
 - Copy those files to `/home/arduino/demo` on the UNO Q.

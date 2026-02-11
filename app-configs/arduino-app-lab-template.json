@@ -1,6 +1,6 @@
 {
-    "code": "UnoQSuper",
-    "name": "UnoQSuperset",
+    "code": "arduino",
+    "name": "arduino",
     "authType": 2,
     "attributes": [
         {
@@ -212,6 +212,14 @@
             "aggregateTypes": []
         },
         {
+            "name": "device_name",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "detection_count",
             "displayName": "",
             "type": "INTEGER",
@@ -388,6 +396,14 @@
             "aggregateTypes": []
         },
         {
+            "name": "last_detected_ts",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "ms",
+            "aggregateTypes": []
+        },
+        {
             "name": "led_state",
             "displayName": "",
             "type": "STRING",
@@ -487,6 +503,14 @@
             "name": "speed",
             "displayName": "",
             "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "state",
+            "displayName": "",
+            "type": "STRING",
             "description": "",
             "unit": "",
             "aggregateTypes": []
@@ -605,6 +629,27 @@
         }
     ],
     "commands": [
+        {
+            "name": "classify-image",
+            "command": "classify-image",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "detect-code",
+            "command": "detect-code",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "detect-objects",
+            "command": "detect-objects",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
         {
             "name": "power",
             "command": "power",

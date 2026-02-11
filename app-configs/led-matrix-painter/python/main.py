@@ -190,9 +190,7 @@ def export_frames(payload: dict = None):
                 continue
             header_parts.append(f"// Animation: {anim_name}")
             header_parts.append(AppFrame.frames_to_c_animation_array(anim_frames, anim_name))
-        header = "
-".join(header_parts).strip() + "
-"
+        header = "\n".join(header_parts).strip() + "\n"
         send_telemetry("export_frames", None)
         return {'header': header}
     else:
@@ -200,9 +198,7 @@ def export_frames(payload: dict = None):
         for frame in frames:
             header_parts.append(f"// {frame.name} (id {frame.id})")
             header_parts.append(frame.to_c_string())
-        header = "
-".join(header_parts).strip() + "
-"
+        header = "\n".join(header_parts).strip() + "\n"
         send_telemetry("export_frames", None)
         return {'header': header}
 
