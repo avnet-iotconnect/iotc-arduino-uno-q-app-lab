@@ -124,14 +124,14 @@ cd /home/arduino/iotc-arduino-uno-q-workshop
 sudo ./scripts/unoq_setup.sh --demo-dir /home/arduino/demo
 ```
 
-## 5. Choose a Lab Example, Clone It, and Copy the IOTCONNECT Files
+## 5. Choose a Lab Example, Clone It, and Copy the /IOTCONNECT Files
 
 In Arduino App Lab:
 1) Browse examples from `app-bricks-examples`.
 2) Copy the selected app into your workspace.
 3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-on-led-matrix`).
 4) Open the matching guide in `app-configs/<example>/README.md`.
-5) Copy the IOTCONNECT-enabled python files from the workshop repo into the app:
+5) Copy the /IOTCONNECT-enabled python files from the workshop repo into the app:
    ```bash
    cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<app-folder>/python/
    ```
@@ -170,15 +170,15 @@ Use these IOTCONNECT-specific guides:
 ## 6. Run the App and Confirm Telemetry
 
 1) Run the app in App Lab.
-2) Confirm telemetry appears in IOTCONNECT.
-3) If you enabled commands, test a command from IOTCONNECT and verify the app receives it.
+2) Confirm telemetry appears in /IOTCONNECT.
+3) If you enabled commands, test a command from /IOTCONNECT and verify the app receives it.
 
-Expected result: the selected App Lab example runs on the UNO Q and publishes telemetry to IOTCONNECT.
+Expected result: the selected App Lab example runs on the UNO Q and publishes telemetry to /IOTCONNECT.
 
 > [!TIP]
 > You can manually manage the /IOTCONNECT Relay Service on your device.
 >
-> To disconnect your device from IOTCONNECT, stop the relay service:
+> To disconnect your device from /IOTCONNECT, stop the relay service:
 > ```bash
 > sudo systemctl stop iotc-relay
 > ```
