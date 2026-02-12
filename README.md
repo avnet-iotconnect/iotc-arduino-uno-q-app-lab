@@ -64,7 +64,7 @@ conjunction with an automated bash script. Follow these steps to complete the pr
 
 3. Now in the resulting Device page, click on the "Templates" tab of the blue toolbar at the bottom of the screen.
 
-4. Right-click and then click "save link as" on [this link to the Arduino Uno Q App Lab device template](https://raw.githubusercontent.com/avnet-iotconnect/iotc-arduino-uno-q-workshop/refs/heads/main/app-configs/templates/arduino-app-lab-template.json)
+4. Right-click and then click "save link as" on [this link to the Arduino Uno Q App Lab device template](https://raw.githubusercontent.com/avnet-iotconnect/iotc-arduino-uno-q-workshop/refs/heads/main/app-configs/arduino-app-lab-template.json)
    to download the raw template file to your PC.
 
 5. Back in the /IOTCONNECT browser tab, click on the "Create Template" button in the top-right of the screen.
