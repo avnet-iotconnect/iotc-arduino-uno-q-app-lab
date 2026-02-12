@@ -7,7 +7,7 @@ Avnet's robust IoT platform to run IoT-connected Arduino App Lab demos.
 2. [Clone This Repo Onto Your Arduino UNO Q](#2-clone-this-repo-onto-your-arduino-uno-q)
 3. [Onboard Arduino into /IOTCONNECT](#3-onboard-arduino-into-iotconnect)
 4. [Set Up /IOTCONNECT SDK and Relay Service](#4-set-up-iotconnect-sdk-and-relay-service)
-5. [Choose a Lab Example, Clone It, and Copy the IOTCONNECT Files](#5-choose-a-lab-example-clone-it-and-copy-the-iotconnect-files)
+5. [Choose a Lab Example, Clone It, and Copy the /IOTCONNECT Files](#5-choose-a-lab-example-clone-it-and-copy-the-iotconnect-files)
 6. [Run the App and Confirm Telemetry](#6-run-the-app-and-confirm-telemetry)
 
 ## 1. Install Arduino App Lab on Host Machine
@@ -138,7 +138,7 @@ In Arduino App Lab:
 
 ### Examples Index
 
-Use these IOTCONNECT-specific guides:
+Use these /IOTCONNECT-specific guides:
 
 - [air-quality-monitoring](app-configs/air-quality-monitoring/README.md)
 - [anomaly-detection](app-configs/anomaly-detection/README.md)

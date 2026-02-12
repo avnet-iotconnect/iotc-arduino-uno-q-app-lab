@@ -1,15 +1,15 @@
-# IOTCONNECT Version: video-face-detection
+# /IOTCONNECT Version: video-face-detection
 
-This is the IOTCONNECT-enabled version of the Arduino example.
+This is the /IOTCONNECT-enabled version of the Arduino example.
 
 Original Arduino README:
 - https://github.com/arduino/app-bricks-examples/blob/main/examples/video-face-detection/README.md
 
 ## Overview
-This version adds an IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from IOTCONNECT.
+This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.
 
 ## What this adds
-- IOTCONNECT relay client wiring
+- /IOTCONNECT relay client wiring
 - Device template for telemetry + commands
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
@@ -17,7 +17,7 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 App Lab folder: `/home/arduino/ArduinoApps/face-detector-on-camera`
 
 ## Files
-- `python/main.py` (IOTCONNECT-enabled app code)
+- `python/main.py` (/IOTCONNECT-enabled app code)
 - `config.json` (telemetry/command definitions)
 
 ## Device Template
@@ -55,13 +55,13 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ## How to use in App Lab
 1) Copy the example into your App Lab workspace.
-2) Copy the IOTCONNECT-enabled python files into the app:
+2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
    cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/video-face-detection/python/* /home/arduino/ArduinoApps/face-detector-on-camera/python/
    ```
-3) Run the app and verify telemetry in IOTCONNECT.
+3) Run the app and verify telemetry in /IOTCONNECT.
 
-## IOTCONNECT setup checklist
+## /IOTCONNECT setup checklist
 - Use the shared device template (`app-configs/arduino-app-lab-template.json`) or create one with the telemetry fields listed above.
 - Create a device bound to that template.
 - Download `iotcDeviceConfig.json`, `device-cert.pem`, and `device-pkey.pem`.
@@ -69,5 +69,5 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
-- If you change the device template in IOTCONNECT, re-create the device or update it to match these fields.
+- If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
 - When faces stop being detected, the app sends a "no detection" telemetry payload (zero counts) after the interval, so dashboards can show the transition.
