@@ -86,7 +86,7 @@ conjunction with an automated bash script. Follow these steps to complete the pr
 11. Select the most appropriate option for your device from the "Entity" dropdown (only for organization, does not
     affect connectivity).
 
-12. Select "arduino-app-lab" from the "Template" dropdown.
+12. Select "arduino" from the "Template" dropdown.
 
 13. In the resulting "Device Certificate" field, select "Use my certificate." Leave this page as-is for now, you will finish it later.
 
