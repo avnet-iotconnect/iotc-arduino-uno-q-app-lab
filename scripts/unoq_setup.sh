@@ -13,10 +13,8 @@ fi
 
 RUN_USER="${SUDO_USER:-$USER}"
 
-if [[ "$SKIP_APT" == "0" ]]; then
-  apt-get update
-  apt-get install -y python3-pip
-fi
+apt-get update
+apt-get install -y python3-pip
 
 mkdir -p /home/arduino/demo
 
@@ -94,7 +92,3 @@ systemctl enable --now iotc-relay.service
 
 echo "Setup complete."
 echo "Demo dir: $DEMO_DIR"
-if [[ "$NO_SYSTEMD" == "1" ]]; then
-  echo "Start manually:"
-  echo "  python3 $DEMO_DIR/iotc-relay-server.py"
-fi
