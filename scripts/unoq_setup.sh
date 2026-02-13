@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DEMO_DIR="/home/arduino/demo"
+DEMO_DIR="/opt/demo"
 
 RELAY_SERVER_URL="https://raw.githubusercontent.com/avnet-iotconnect/iotc-relay-service/main/relay-server/iotc-relay-server.py"
 RELAY_CLIENT_URL="https://raw.githubusercontent.com/avnet-iotconnect/iotc-relay-service/main/client-module/python/iotc_relay_client.py"
@@ -16,22 +16,7 @@ RUN_USER="${SUDO_USER:-$USER}"
 apt-get update
 apt-get install -y python3-pip
 
-mkdir -p /home/arduino/demo
-
-# Some relay server builds expect /home/weston/demo by default. Provide a compatibility symlink.
-if [[ "$DEMO_DIR" != "/home/weston/demo" ]]; then
-  if [[ ! -e "/home/weston" ]]; then
-    mkdir -p /home/weston
-  fi
-  if [[ -L "/home/weston/demo" ]]; then
-    true
-  elif [[ -e "/home/weston/demo" ]]; then
-    true
-  else
-    ln -s "$DEMO_DIR" /home/weston/demo
-    echo "Created symlink: /home/weston/demo -> $DEMO_DIR"
-  fi
-fi
+mkdir -p "$DEMO_DIR"
 
 if command -v curl >/dev/null 2>&1; then
   DL_CMD=(curl -fsSL)

@@ -8,7 +8,7 @@ set -e
 # workaround for Git bash failing with subject formatting error for openssl
 export MSYS_NO_PATHCONV=1
 
-OUTDIR="/home/arduino/demo"
+OUTDIR="/opt/demo"
 mkdir -p "${OUTDIR}"
 
 function askyn {

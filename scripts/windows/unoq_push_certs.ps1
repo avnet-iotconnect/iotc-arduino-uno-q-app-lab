@@ -1,6 +1,6 @@
 param(
     [string]$DownloadsDir = "$env:USERPROFILE\Downloads",
-    [string]$DemoDir = "/home/arduino/demo",
+    [string]$DemoDir = "/opt/demo",
     [switch]$SkipAdbInstall
 )
 

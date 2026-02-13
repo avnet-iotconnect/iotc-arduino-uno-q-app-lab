@@ -129,7 +129,7 @@ Run these commands to install the /IOTCONNECT Python Lite SDK and then download 
 
 ```bash
 cd /home/arduino/iotc-arduino-uno-q-workshop
-sudo ./scripts/unoq_setup.sh --demo-dir /home/arduino/demo
+sudo ./scripts/unoq_setup.sh --demo-dir /opt/demo
 ```
 
 >[!NOTE]
