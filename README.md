@@ -102,10 +102,11 @@ cd /home/arduino/iotc-arduino-uno-q-workshop/scripts
 15. Execute the automated device credentials script with this command:
 
 ```
-bash ./credentials.sh
+sudo bash ./credentials.sh
 ```
 
-16. When prompted, press ENTER to have the script print out the generated device certificate.
+16. If you generated a new certificate, when prompted, press ENTER to print it.  
+    If you chose to reuse existing credentials, the script may skip certificate reprint.
 
 17. Copy **(using CTRL+C)** the device certificate text (including BEGIN and END lines) and paste the text into the 
 certificate box in the /IOTCONNECT device creation page.
@@ -132,6 +133,14 @@ cd /home/arduino/iotc-arduino-uno-q-workshop
 sudo ./scripts/unoq_setup.sh --demo-dir /opt/demo
 ```
 
+Ensure credential file permissions allow the `iotc-relay` service user (`arduino`) to read them:
+
+```bash
+sudo chown arduino:arduino /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert.pem /opt/demo/device-pkey.pem
+sudo chmod 644 /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert.pem
+sudo chmod 600 /opt/demo/device-pkey.pem
+```
+
 >[!NOTE]
 > If during the setup script a pop-up appears asking if you would like to restart select device services, simply press 
 > ENTER.
@@ -146,13 +155,13 @@ In Arduino App Lab:
 5) Copy the /IOTCONNECT-enabled python files and relay client from the workshop repo into the app:
    ```bash
    cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<app-folder>/python/
-   cp /home/arduino/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<app-folder>/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<app-folder>/python/
    ```
 > [!TIP]
 > For example, if you were using the "blink" app and you had named your copy "my-blink-app", your commands would be:
 >   ```bash
 >   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/blink/python/* /home/arduino/ArduinoApps/my-blink-app/python/
->   cp /home/arduino/demo/iotc_relay_client.py /home/arduino/ArduinoApps/my-blink-app/python/
+>   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/my-blink-app/python/
 >   ```
 
 ### Examples Index
@@ -209,5 +218,15 @@ Expected result: the selected App Lab example runs on the UNO Q and publishes te
 >
 > To restart:
 > ```bash
+> sudo systemctl restart iotc-relay
+> ```
+>
+> If telemetry does not show up and logs report `Address already in use`, check what is bound to TCP port `8899`:
+> ```bash
+> sudo ss -ltnp | grep ':8899'
+> ```
+> If a conflicting bridge service is using that port (for example `iotc-socat`), stop it and restart relay:
+> ```bash
+> sudo systemctl disable --now iotc-socat
 > sudo systemctl restart iotc-relay
 > ```
