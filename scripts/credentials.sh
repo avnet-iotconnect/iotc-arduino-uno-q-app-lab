@@ -55,18 +55,33 @@ function gencert {
 
 DEVICE_CERT="${OUTDIR}/device-cert.pem"
 DEVICE_KEY="${OUTDIR}/device-pkey.pem"
+generated_device_cert=false
 
 if [[ -f "${DEVICE_CERT}" && -f "${DEVICE_KEY}" ]]; then
-    if askyn "Device certificate and key already exist. Overwrite?"; then
+    if askyn "Device certificate and key already exist. Regenerate?"; then
         gencert "device"
+        generated_device_cert=true
+    else
+        echo "Keeping existing device certificate and key."
+        if ! askyn "Continue onboarding with existing credentials?"; then
+            echo "Exiting without modifying device credentials."
+            exit 0
+        fi
     fi
 else
     gencert "device"
+    generated_device_cert=true
+fi
+
+if ${generated_device_cert}; then
+    cert_action="generated"
+else
+    cert_action="existing"
 fi
 
 cat <<END
 ---- IoTConnect Python Lite Certificate Script ----
-This script will generate and format device credentials for your Arduino Uno Q
+This script will print and format ${cert_action} device credentials for your Arduino Uno Q
 to help onboard it into /IOTCONNECT.
 END
 
