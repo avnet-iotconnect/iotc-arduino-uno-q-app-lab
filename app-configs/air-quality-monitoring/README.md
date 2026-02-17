@@ -29,7 +29,7 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ![air-quality-monitoring dashboard](aqm-dashboard.jpg)
 
-[Dashboard template file](aqm-dashboard-template.json)
+Dashboard template file:[aqm-dashboard-template.json](aqm-dashboard-template.json)
 
 Import into /IOTCONNECT:
 1. Open /IOTCONNECT and go to **Dashboard**.
@@ -65,6 +65,7 @@ Import into /IOTCONNECT:
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+
 
 
 
