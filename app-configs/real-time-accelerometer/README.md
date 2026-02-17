@@ -1,4 +1,4 @@
-# IoTConnect-Enabled: real-time-accelerometer
+# /IOTCONNECT-Enabled: real-time-accelerometer
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
@@ -19,6 +19,16 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 ## Files
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `config.json` (telemetry/command definitions)
+
+## Additional Hardware Required
+
+This app requires a Modulino Movement sensor and a Qwiic cable to connect it to the Arduino Uno Q.
+
+**Modulino Movement Sensor:**
+- [Arduino Modulino Movement](https://store.arduino.cc/products/modulino-movement)
+
+**Qwiic Cable:**
+- [elechawk Qwiic Cable](https://www.amazon.com/elechawk-SparkFun-Development-Breadboard-Connector/dp/B08HQ1VSVL)
 
 ## Device Template
 This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
@@ -60,7 +70,7 @@ Import into /IOTCONNECT:
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/real-time-accelerometer/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/real-time-accelerometer/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.

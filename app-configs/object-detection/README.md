@@ -1,4 +1,4 @@
-# IoTConnect-Enabled: object-detection
+# /IOTCONNECT-Enabled: object-detection
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 

@@ -1,4 +1,4 @@
-# IoTConnect-Enabled: air-quality-monitoring
+# /IOTCONNECT-Enabled: air-quality-monitoring
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 

@@ -1,4 +1,4 @@
-# IoTConnect-Enabled: system-resources-logger
+# /IOTCONNECT-Enabled: system-resources-logger
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
@@ -56,7 +56,8 @@ Import into /IOTCONNECT:
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/system-resources-logger/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/system-resources-logger/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.

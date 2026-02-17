@@ -180,14 +180,14 @@ Use these /IOTCONNECT-specific guides:
 - [blink-with-ui](app-configs/blink-with-ui/README.md)
 - [cloud-blink](app-configs/cloud-blink/README.md)
 - [code-detector](app-configs/code-detector/README.md) `[AH]`
-- [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md) `[DB]`
+- [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md) `[DB]` `[AH]`
 - [image-classification](app-configs/image-classification/README.md) `[DB]`
 - [keyword-spotting](app-configs/keyword-spotting/README.md)
 - [led-matrix-painter](app-configs/led-matrix-painter/README.md)
 - [mascot-jump-game](app-configs/mascot-jump-game/README.md)
 - [object-detection](app-configs/object-detection/README.md) `[DB]`
 - [object-hunting](app-configs/object-hunting/README.md) `[AH]`
-- [real-time-accelerometer](app-configs/real-time-accelerometer/README.md) `[DB]`
+- [real-time-accelerometer](app-configs/real-time-accelerometer/README.md) `[DB]` `[AH]`
 - [system-resources-logger](app-configs/system-resources-logger/README.md) `[DB]`
 - [theremin](app-configs/theremin/README.md)
 - [unoq-pin-toggle](app-configs/unoq-pin-toggle/README.md)

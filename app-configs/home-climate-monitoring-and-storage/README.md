@@ -1,4 +1,4 @@
-# IoTConnect-Enabled: home-climate-monitoring-and-storage
+# /IOTCONNECT-Enabled: home-climate-monitoring-and-storage
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
@@ -19,6 +19,16 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 ## Files
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `config.json` (telemetry/command definitions)
+
+## Additional Hardware Required
+
+This app requires a Modulino Thermo sensor and a Qwiic cable to connect it to the Arduino Uno Q.
+
+**Modulino Thermo Sensor:**
+- [Arduino Modulino Thermo](https://store-usa.arduino.cc/products/modulino-thermo?srsltid=AfmBOooBjqt7UCtENS440MK_8stLHrxES2SVECgwXTJdztwZsh08Md51)
+
+**Qwiic Cable:**
+- [elechawk Qwiic Cable](https://www.amazon.com/elechawk-SparkFun-Development-Breadboard-Connector/dp/B08HQ1VSVL)
 
 ## Device Template
 This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.

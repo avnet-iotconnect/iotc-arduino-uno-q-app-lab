@@ -1,4 +1,4 @@
-# IoTConnect-Enabled: image-classification
+# /IOTCONNECT-Enabled: image-classification
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
