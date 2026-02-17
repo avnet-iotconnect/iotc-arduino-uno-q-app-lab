@@ -29,7 +29,7 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ![image-classification dashboard](img-class-dashboard.jpg)
 
-Dashboard template file: [$(unoq_imgcla_dashboard_export.json.Name)](unoq_imgcla_dashboard_export.json)
+[Dashboard template file](unoq_imgcla_dashboard_export.json)
 
 Import into /IOTCONNECT:
 1. Open /IOTCONNECT and go to **Dashboard**.
@@ -70,7 +70,8 @@ Import into /IOTCONNECT:
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/image-classification/python/* /home/arduino/ArduinoApps/classify-images/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/image-classification/python/* /home/arduino/ArduinoApps/classify-images/python/
+
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/classify-images/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
@@ -78,6 +79,7 @@ Import into /IOTCONNECT:
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+
 
 
 
