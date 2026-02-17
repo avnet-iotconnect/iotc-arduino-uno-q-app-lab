@@ -8,7 +8,7 @@ Original Arduino README:
 ## Overview
 This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.
 
-## What this adds
+## What this Adds
 - /IOTCONNECT relay client wiring
 - Device template for telemetry + commands
 - Optional commands (if defined below)
@@ -87,6 +87,7 @@ Import into /IOTCONNECT:
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+
 
 
 
