@@ -20,6 +20,24 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `config.json` (telemetry/command definitions)
 
+## Additional Hardware Required
+
+This app requires a USB camera and a powered USB hub (since the Arduino Uno Q has a single USB-C port used for power).
+
+**USB Camera Recommendations:**
+- [Logitech Brio 101](https://www.amazon.com/dp/B085TFF7M1?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_14&th=1)
+- [Logitech Brio 101 (alternate listing)](https://www.amazon.com/Logitech-Webcam-Meetings-Streaming-Built/dp/B0BXGFFSL1)
+- [Logitech Brio 300](https://www.amazon.com/Logitech-Reduction-Microphone-ceritified-Correction/dp/B09RGJWVG7/ref=sr_1_1?crid=1XGN6Z1TUMVER&dib=eyJ2IjoiMSJ9.b3jaFFykcIf7kAnwccsMPHXCrukugU3u-uQ8p41y2Cu-Xv0MJUA4oqvKkMbPzMhOPd2povyLUViBRE62Pz5-MPpEYLxILzpFZnJr6DA1FG2hcHIEO0YNDEcwsGDq909_Fle4j_EGkZhlpLKyFrCyaN0iIoPGotyuJDwcoB7MIp8qOsxfgAzR5-cAKTcxEtEQgfdnHZbwGfsxEd2k86d5SYiHnrQZ_u8yrndqAQh8aC4fswkQoi8t8rtHdLtsJJljKdErkEa1QhOgIz4ZxOHdmaNwM45Zdtpf-GLdKgpxi3k.RJZSn1oXn6BYwPdwWlTF_Yd1BlSOF35BmkjcwDWhJmc&dib_tag=se&keywords=logitech+brio+300&qid=1771353155&s=electronics&sprefix=logitech+brio+300%2Celectronics%2C165&sr=1-1)
+
+**Powered USB Hub Recommendations:**
+- [Sabrent 4-Port USB Hub](https://www.amazon.com/dp/B07H2ZS1B5?ref=cm_sw_r_cp_ud_dp_700AHY8JWV8DF6AR7V2Q&ref_=cm_sw_r_cp_ud_dp_700AHY8JWV8DF6AR7V2Q&social_share=cm_sw_r_cp_ud_dp_700AHY8JWV8DF6AR7V2Q&th=1)
+
+> [!NOTE]
+> Most USB cameras should work, but the models above have been tested and verified.
+
+> [!IMPORTANT]
+> When using a powered USB hub, Arduino App Lab will no longer recognize the board via USB. You will need to connect to the board using the **Network** option instead.
+
 ## Device Template
 This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
 - Template code: `arduino`
