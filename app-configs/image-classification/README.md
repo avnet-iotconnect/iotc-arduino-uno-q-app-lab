@@ -29,7 +29,7 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ![image-classification dashboard](img-class-dashboard.jpg)
 
-[Dashboard template file](unoq_imgcla_dashboard_export.json)
+Dashboard template file: [unoq_imgcla_dashboard_export.json](unoq_imgcla_dashboard_export.json)
 
 Import into /IOTCONNECT:
 1. Open /IOTCONNECT and go to **Dashboard**.
@@ -79,6 +79,7 @@ Import into /IOTCONNECT:
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+
 
 
 
