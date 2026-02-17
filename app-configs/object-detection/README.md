@@ -29,7 +29,7 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ![object-detection dashboard](unoQ-objdetimg-dashboard.jpg)
 
-Dashboard template file: [$(obj-det-dashboard-template.json.Name)](obj-det-dashboard-template.json)
+Dashboard template file: [obj-det-dashboard-template.json](obj-det-dashboard-template.json)
 
 Import into /IOTCONNECT:
 1. Open /IOTCONNECT and go to **Dashboard**.
@@ -78,7 +78,8 @@ Import into /IOTCONNECT:
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/object-detection/python/* /home/arduino/ArduinoApps/detect-objects-on-images/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/object-detection/python/* /home/arduino/ArduinoApps/detect-objects-on-images/python/
+
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/detect-objects-on-images/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
@@ -86,6 +87,7 @@ Import into /IOTCONNECT:
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+
 
 
 
