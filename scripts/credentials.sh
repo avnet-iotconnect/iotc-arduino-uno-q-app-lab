@@ -55,23 +55,46 @@ function gencert {
 
 DEVICE_CERT="${OUTDIR}/device-cert.pem"
 DEVICE_KEY="${OUTDIR}/device-pkey.pem"
+generated_device_cert=false
+reuse_existing_device_cert=false
+print_device_cert=false
 
 if [[ -f "${DEVICE_CERT}" && -f "${DEVICE_KEY}" ]]; then
-    if askyn "Device certificate and key already exist. Overwrite?"; then
+    if askyn "Device certificate and key already exist. Regenerate?"; then
         gencert "device"
+        generated_device_cert=true
+        print_device_cert=true
+    else
+        echo "Keeping existing device certificate and key."
+        reuse_existing_device_cert=true
+        if ! askyn "Continue onboarding with existing credentials?"; then
+            echo "Exiting without modifying device credentials."
+            exit 0
+        fi
+        echo "Reusing existing credentials. Skipping certificate reprint."
     fi
 else
     gencert "device"
+    generated_device_cert=true
+    print_device_cert=true
+fi
+
+if ${generated_device_cert}; then
+    cert_action="generated"
+else
+    cert_action="existing"
 fi
 
 cat <<END
 ---- IoTConnect Python Lite Certificate Script ----
-This script will generate and format device credentials for your Arduino Uno Q
+This script will use and format ${cert_action} device credentials for your Arduino Uno Q
 to help onboard it into /IOTCONNECT.
 END
 
-read -rp "ENTER to print the certificate and proceed:"
-cat "${DEVICE_CERT}"
+if ${print_device_cert}; then
+    read -rp "ENTER to print the certificate and proceed:"
+    cat "${DEVICE_CERT}"
+fi
 
 cat <<END
 - Click the "Save & View" button.
@@ -79,17 +102,33 @@ cat <<END
 END
 
 CONFIG_JSON="${OUTDIR}/iotcDeviceConfig.json"
-paste_config_json=true
+paste_config_json=false
 
-if [[ -f "${CONFIG_JSON}" ]]; then
-    if ! askyn "iotcDeviceConfig.json already exists. Overwrite?"; then
-        paste_config_json=false
+if ${generated_device_cert}; then
+    paste_config_json=true
+fi
+
+if ${reuse_existing_device_cert}; then
+    if [[ -f "${CONFIG_JSON}" ]]; then
+        echo "Keeping existing iotcDeviceConfig.json."
+    else
+        echo "iotcDeviceConfig.json not found. A config file is required to continue."
+        paste_config_json=true
+    fi
+fi
+
+if ${paste_config_json}; then
+    if [[ -f "${CONFIG_JSON}" ]]; then
+        if ! askyn "iotcDeviceConfig.json already exists. Overwrite?"; then
+            echo "Keeping existing iotcDeviceConfig.json."
+            paste_config_json=false
+        fi
     fi
 fi
 
 if ${paste_config_json}; then
     echo "Paste the downloaded config file here and press ENTER after the last line:"
-    echo > "${CONFIG_JSON}"
+    > "${CONFIG_JSON}"
 
     while true; do
         read -r line

@@ -1,4 +1,4 @@
-# /IOTCONNECT Version: weather-forecast
+# IoTConnect-Enabled: weather-forecast
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
@@ -8,13 +8,13 @@ Original Arduino README:
 ## Overview
 This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.
 
-## What this adds
+## What This Adds
 - /IOTCONNECT relay client wiring
 - Device template for telemetry + commands
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
 
-App Lab folder: `/home/arduino/ArduinoApps/weather-forecast-on-led-matrix`
+App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 
 ## Files
 - `python/main.py` (/IOTCONNECT-enabled app code)
@@ -40,14 +40,16 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 | `set-interval` | `seconds` |
 | `set-city` | `city` |
 
-## How to use in App Lab
+## How to Use in App Lab
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/weather-forecast/python/* /home/arduino/ArduinoApps/weather-forecast-on-led-matrix/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/weather-forecast/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+

@@ -102,10 +102,11 @@ cd /home/arduino/iotc-arduino-uno-q-workshop/scripts
 15. Execute the automated device credentials script with this command:
 
 ```
-bash ./credentials.sh
+sudo bash ./credentials.sh
 ```
 
-16. When prompted, press ENTER to have the script print out the generated device certificate.
+16. If you generated a new certificate, when prompted, press ENTER to print it.  
+    If you chose to reuse existing credentials, the script may skip certificate reprint.
 
 17. Copy **(using CTRL+C)** the device certificate text (including BEGIN and END lines) and paste the text into the 
 certificate box in the /IOTCONNECT device creation page.
@@ -129,12 +130,20 @@ Run these commands to install the /IOTCONNECT Python Lite SDK and then download 
 
 ```bash
 cd /home/arduino/iotc-arduino-uno-q-workshop
-sudo ./scripts/unoq_setup.sh --demo-dir /opt/demo
+sudo ./scripts/unoq_setup.sh
 ```
 
 >[!NOTE]
 > If during the setup script a pop-up appears asking if you would like to restart select device services, simply press 
 > ENTER.
+
+Ensure credential file permissions allow the `iotc-relay` service user (`arduino`) to read them:
+
+```bash
+sudo chown arduino:arduino /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert.pem /opt/demo/device-pkey.pem
+sudo chmod 644 /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert.pem
+sudo chmod 600 /opt/demo/device-pkey.pem
+```
 
 ## 5. Choose a Lab Example, Clone It, and Copy the /IOTCONNECT Files
 
@@ -145,43 +154,46 @@ In Arduino App Lab:
 4) Name your copy of the app (ideally similar to the app names in this repo)
 5) Copy the /IOTCONNECT-enabled python files and relay client from the workshop repo into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<app-folder>/python/
-   cp /home/arduino/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<app-folder>/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 > [!TIP]
 > For example, if you were using the "blink" app and you had named your copy "my-blink-app", your commands would be:
 >   ```bash
 >   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/blink/python/* /home/arduino/ArduinoApps/my-blink-app/python/
->   cp /home/arduino/demo/iotc_relay_client.py /home/arduino/ArduinoApps/my-blink-app/python/
+>   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/my-blink-app/python/
 >   ```
 
 ### Examples Index
 
 Use these /IOTCONNECT-specific guides:
 
-- [air-quality-monitoring](app-configs/air-quality-monitoring/README.md)
+>[!NOTE]
+>`[DB]` = dashboard image and exported /IOTCONNECT dashboard JSON template available in the example's folder.
+
+- [air-quality-monitoring](app-configs/air-quality-monitoring/README.md) `[DB]`
 - [anomaly-detection](app-configs/anomaly-detection/README.md)
-- [audio-classification](app-configs/audio-classification/README.md)
+- [audio-classification](app-configs/audio-classification/README.md) `[DB]`
 - [bedtime-story-teller](app-configs/bedtime-story-teller/README.md)
 - [blink](app-configs/blink/README.md)
 - [blink-with-ui](app-configs/blink-with-ui/README.md)
 - [cloud-blink](app-configs/cloud-blink/README.md)
 - [code-detector](app-configs/code-detector/README.md)
-- [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md)
-- [image-classification](app-configs/image-classification/README.md)
+- [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md) `[DB]`
+- [image-classification](app-configs/image-classification/README.md) `[DB]`
 - [keyword-spotting](app-configs/keyword-spotting/README.md)
 - [led-matrix-painter](app-configs/led-matrix-painter/README.md)
 - [mascot-jump-game](app-configs/mascot-jump-game/README.md)
-- [object-detection](app-configs/object-detection/README.md)
+- [object-detection](app-configs/object-detection/README.md) `[DB]`
 - [object-hunting](app-configs/object-hunting/README.md)
-- [real-time-accelerometer](app-configs/real-time-accelerometer/README.md)
-- [system-resources-logger](app-configs/system-resources-logger/README.md)
+- [real-time-accelerometer](app-configs/real-time-accelerometer/README.md) `[DB]`
+- [system-resources-logger](app-configs/system-resources-logger/README.md) `[DB]`
 - [theremin](app-configs/theremin/README.md)
 - [unoq-pin-toggle](app-configs/unoq-pin-toggle/README.md)
-- [vibration-anomaly-detection](app-configs/vibration-anomaly-detection/README.md)
-- [video-face-detection](app-configs/video-face-detection/README.md)
-- [video-generic-object-detection](app-configs/video-generic-object-detection/README.md)
-- [video-person-classification](app-configs/video-person-classification/README.md)
+- [vibration-anomaly-detection](app-configs/vibration-anomaly-detection/README.md) `[DB]`
+- [video-face-detection](app-configs/video-face-detection/README.md) `[DB]`
+- [video-generic-object-detection](app-configs/video-generic-object-detection/README.md) `[DB]`
+- [video-person-classification](app-configs/video-person-classification/README.md) `[DB]`
 - [weather-forecast](app-configs/weather-forecast/README.md)
 
 ---
@@ -209,5 +221,15 @@ Expected result: the selected App Lab example runs on the UNO Q and publishes te
 >
 > To restart:
 > ```bash
+> sudo systemctl restart iotc-relay
+> ```
+>
+> If telemetry does not show up and logs report `Address already in use`, check what is bound to TCP port `8899`:
+> ```bash
+> sudo ss -ltnp | grep ':8899'
+> ```
+> If a conflicting bridge service is using that port (for example `iotc-socat`), stop it and restart relay:
+> ```bash
+> sudo systemctl disable --now iotc-socat
 > sudo systemctl restart iotc-relay
 > ```

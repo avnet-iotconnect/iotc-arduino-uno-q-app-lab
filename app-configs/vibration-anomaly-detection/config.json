@@ -5,6 +5,12 @@
             "parameters": [
                 "threshold"
             ]
+        },
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
         }
     ],
     "example": "vibration-anomaly-detection",
@@ -23,6 +29,10 @@
         },
         {
             "name": "threshold",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "interval_sec",
             "type": "DECIMAL"
         },
         {
