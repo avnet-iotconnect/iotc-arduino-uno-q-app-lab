@@ -29,7 +29,7 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ![home-climate-monitoring-and-storage dashboard](home-climate-dashboard.jpg)
 
-Dashboard template file: [$(Home_Climate_dashboard_export.json.Name)](Home_Climate_dashboard_export.json)
+Dashboard template file: [Home_Climate_dashboard_export.json](Home_Climate_dashboard_export.json)
 
 Import into /IOTCONNECT:
 1. Open /IOTCONNECT and go to **Dashboard**.
@@ -58,7 +58,8 @@ Import into /IOTCONNECT:
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/home-climate-monitoring-and-storage/python/* /home/arduino/ArduinoApps/home-climate-monitoring-and-storage/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/home-climate-monitoring-and-storage/python/* /home/arduino/ArduinoApps/home-climate-monitoring-and-storage/python/
+
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/home-climate-monitoring-and-storage/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
@@ -66,5 +67,6 @@ Import into /IOTCONNECT:
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+
 
 
