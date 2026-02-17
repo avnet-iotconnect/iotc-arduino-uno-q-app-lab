@@ -42,7 +42,8 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/led-matrix-painter/python/* /home/arduino/ArduinoApps/led-matrix-painter/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/led-matrix-painter/python/* /home/arduino/ArduinoApps/led-matrix-painter/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/led-matrix-painter/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 

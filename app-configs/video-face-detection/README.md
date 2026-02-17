@@ -25,6 +25,18 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 - Template code: `arduino`
 - Template name: `arduino`
 
+## /IOTCONNECT Dynamic Dashboard
+
+![video-face-detection dashboard](dashboard-face.jpg)
+
+Dashboard template file: [$(faceDetect-dashboard-template.json.Name)](faceDetect-dashboard-template.json)
+
+Import into /IOTCONNECT:
+1. Open /IOTCONNECT and go to **Dashboard**.
+2. Click **Import Dashboard** and upload the JSON file linked above.
+3. Save the imported dashboard and map it to the correct device/template.
+4. Open the dashboard in live mode and verify widgets populate from telemetry.
+
 ## Telemetry Fields
 | Field | Type |
 | --- | --- |
@@ -57,7 +69,8 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/video-face-detection/python/* /home/arduino/ArduinoApps/face-detector-on-camera/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/video-face-detection/python/* /home/arduino/ArduinoApps/face-detector-on-camera/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/face-detector-on-camera/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 
@@ -65,3 +78,5 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
 - When faces stop being detected, the app sends a "no detection" telemetry payload (zero counts) after the interval, so dashboards can show the transition.
+
+

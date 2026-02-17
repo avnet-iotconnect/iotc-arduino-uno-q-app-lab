@@ -44,7 +44,8 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/weather-forecast/python/* /home/arduino/ArduinoApps/weather-forecast-on-led-matrix/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/weather-forecast/python/* /home/arduino/ArduinoApps/weather-forecast-on-led-matrix/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/weather-forecast-on-led-matrix/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 

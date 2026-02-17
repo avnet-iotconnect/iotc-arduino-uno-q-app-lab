@@ -43,10 +43,12 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/keyword-spotting/python/* /home/arduino/ArduinoApps/hey-arduino/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/keyword-spotting/python/* /home/arduino/ArduinoApps/hey-arduino/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/hey-arduino/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+

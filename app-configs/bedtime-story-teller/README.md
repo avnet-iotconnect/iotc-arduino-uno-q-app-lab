@@ -45,7 +45,8 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/bedtime-story-teller/python/* /home/arduino/ArduinoApps/bedtime-story-teller/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/bedtime-story-teller/python/* /home/arduino/ArduinoApps/bedtime-story-teller/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/bedtime-story-teller/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 
