@@ -8,7 +8,7 @@ Original Arduino README:
 ## Overview
 This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.
 
-## What this adds
+## What This Adds
 - /IOTCONNECT relay client wiring
 - Device template for telemetry + commands
 - Optional commands (if defined below)
@@ -29,7 +29,7 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ![system-resources-logger dashboard](unoq-logger-dashboard.jpg)
 
-Dashboard template file: [$(logger-dashboard-template.json.Name)](logger-dashboard-template.json)
+Dashboard template file: [logger-dashboard-template.json](logger-dashboard-template.json)
 
 Import into /IOTCONNECT:
 1. Open /IOTCONNECT and go to **Dashboard**.
@@ -52,10 +52,7 @@ Import into /IOTCONNECT:
 | --- | --- |
 | `set-interval` | `seconds` |
 
-## Notes on App Lab folder names
-- If your App Lab folder name differs, pass it as the first argument and the example name as the second.
-
-## How to use in App Lab
+## How to Use in App Lab
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash

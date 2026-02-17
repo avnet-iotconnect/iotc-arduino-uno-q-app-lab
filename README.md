@@ -130,7 +130,7 @@ Run these commands to install the /IOTCONNECT Python Lite SDK and then download 
 
 ```bash
 cd /home/arduino/iotc-arduino-uno-q-workshop
-sudo ./scripts/unoq_setup.sh --demo-dir /opt/demo
+sudo ./scripts/unoq_setup.sh
 ```
 
 >[!NOTE]
@@ -154,8 +154,8 @@ In Arduino App Lab:
 4) Name your copy of the app (ideally similar to the app names in this repo)
 5) Copy the /IOTCONNECT-enabled python files and relay client from the workshop repo into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<app-folder>/python/
-   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<app-folder>/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 > [!TIP]
 > For example, if you were using the "blink" app and you had named your copy "my-blink-app", your commands would be:

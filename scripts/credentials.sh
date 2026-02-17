@@ -128,7 +128,7 @@ fi
 
 if ${paste_config_json}; then
     echo "Paste the downloaded config file here and press ENTER after the last line:"
-    echo > "${CONFIG_JSON}"
+    > "${CONFIG_JSON}"
 
     while true; do
         read -r line

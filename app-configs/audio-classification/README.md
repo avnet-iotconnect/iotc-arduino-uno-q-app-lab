@@ -8,13 +8,13 @@ Original Arduino README:
 ## Overview
 This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.
 
-## What this adds
+## What This Adds
 - /IOTCONNECT relay client wiring
 - Device template for telemetry + commands
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
 
-App Lab folder: `/home/arduino/ArduinoApps/glass-breaking-sensor`
+App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 
 ## Files
 - `python/main.py` (/IOTCONNECT-enabled app code)
@@ -54,12 +54,12 @@ Import into /IOTCONNECT:
 | --- | --- |
 | `set-interval` | `seconds` |
 
-## How to use in App Lab
+## How to Use in App Lab
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/audio-classification/python/* /home/arduino/ArduinoApps/glass-breaking-sensor/python/
-   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/glass-breaking-sensor/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/audio-classification/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 

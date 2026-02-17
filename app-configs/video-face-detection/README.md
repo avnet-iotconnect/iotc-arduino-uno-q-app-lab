@@ -8,13 +8,13 @@ Original Arduino README:
 ## Overview
 This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.
 
-## What this adds
+## What This Adds
 - /IOTCONNECT relay client wiring
 - Device template for telemetry + commands
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
 
-App Lab folder: `/home/arduino/ArduinoApps/face-detector-on-camera`
+App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 
 ## Files
 - `python/main.py` (/IOTCONNECT-enabled app code)
@@ -29,7 +29,7 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 
 ![video-face-detection dashboard](dashboard-face.jpg)
 
-Dashboard template file: [$(faceDetect-dashboard-template.json.Name)](faceDetect-dashboard-template.json)
+Dashboard template file: [faceDetect-dashboard-template.json](faceDetect-dashboard-template.json)
 
 Import into /IOTCONNECT:
 1. Open /IOTCONNECT and go to **Dashboard**.
@@ -65,12 +65,12 @@ Import into /IOTCONNECT:
 | `set-auto` | `enabled` |
 | `run-detect` | `(none)` |
 
-## How to use in App Lab
+## How to Use in App Lab
 1) Copy the example into your App Lab workspace.
 2) Copy the /IOTCONNECT-enabled python files into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/video-face-detection/python/* /home/arduino/ArduinoApps/face-detector-on-camera/python/
-   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/face-detector-on-camera/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/video-face-detection/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 
