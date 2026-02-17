@@ -133,6 +133,10 @@ cd /home/arduino/iotc-arduino-uno-q-workshop
 sudo ./scripts/unoq_setup.sh --demo-dir /opt/demo
 ```
 
+>[!NOTE]
+> If during the setup script a pop-up appears asking if you would like to restart select device services, simply press 
+> ENTER.
+
 Ensure credential file permissions allow the `iotc-relay` service user (`arduino`) to read them:
 
 ```bash
@@ -140,10 +144,6 @@ sudo chown arduino:arduino /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert
 sudo chmod 644 /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert.pem
 sudo chmod 600 /opt/demo/device-pkey.pem
 ```
-
->[!NOTE]
-> If during the setup script a pop-up appears asking if you would like to restart select device services, simply press 
-> ENTER.
 
 ## 5. Choose a Lab Example, Clone It, and Copy the /IOTCONNECT Files
 
@@ -168,7 +168,8 @@ In Arduino App Lab:
 
 Use these /IOTCONNECT-specific guides:
 
-- `[DB]` = dashboard image + dashboard JSON template/export available in that example folder.
+>[!NOTE]
+>`[DB]` = dashboard image and exported /IOTCONNECT dashboard JSON template available in the example's folder.
 
 - [air-quality-monitoring](app-configs/air-quality-monitoring/README.md) `[DB]`
 - [anomaly-detection](app-configs/anomaly-detection/README.md)
