@@ -1,4 +1,4 @@
-# /IOTCONNECT Version: led-matrix-painter
+# IoTConnect-Enabled: led-matrix-painter
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
@@ -50,3 +50,4 @@ This app uses the shared device template at `app-configs/arduino-app-lab-templat
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+

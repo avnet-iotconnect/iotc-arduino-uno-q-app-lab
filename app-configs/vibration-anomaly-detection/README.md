@@ -1,4 +1,4 @@
-# /IOTCONNECT Version: vibration-anomaly-detection
+# IoTConnect-Enabled: vibration-anomaly-detection
 
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
@@ -66,4 +66,5 @@ Import into /IOTCONNECT:
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+
 
