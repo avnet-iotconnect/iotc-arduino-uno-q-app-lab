@@ -46,13 +46,11 @@ Run these commands to clone this repository onto your Arduino to get access to t
 > Users can paste into the Arduino App Lab terminal using **RIGHT-CLICK**. Using CTRL+V is not supported in the App Lab Terminal.
 
 ```bash
-cd /home/arduino
 sudo mkdir -p /opt/demo && sudo chown $USER /opt/demo
 
-git clone https://github.com/avnet-iotconnect/iotc-arduino-uno-q-workshop.git
-cd iotc-arduino-uno-q-workshop
+git clone https://github.com/avnet-iotconnect/iotc-arduino-uno-q-workshop.git /home/arduino
 
-chmod +x scripts/*.sh
+chmod +x iotc-arduino-uno-q-workshop/scripts/*.sh
 ```
 
 
@@ -94,44 +92,37 @@ conjunction with an automated bash script. Follow these steps to complete the pr
 
 13. In the resulting "Device Certificate" field, select "Use my certificate." Leave this page as-is for now, you will finish it later.
 
-14. Swapping over to the terminal of your Arduino, navigate to the `scripts` directory of the repo using this command:
+14. Execute the automated device credentials script with this command:
 
 ```
-cd /home/arduino/iotc-arduino-uno-q-workshop/scripts
+bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/credentials.sh
 ```
 
-15. Execute the automated device credentials script with this command:
-
-```
-bash ./credentials.sh
-```
-
-16. If you generated a new certificate, when prompted, press ENTER to print it.  
+15. If you generated a new certificate, when prompted, press ENTER to print it.  
     If you chose to reuse existing credentials, the script may skip certificate reprint.
 
-17. Copy **(using CTRL+C)** the device certificate text (including BEGIN and END lines) and paste the text into the 
+16. Copy **(using CTRL+C)** the device certificate text (including BEGIN and END lines) and paste the text into the 
 certificate box in the /IOTCONNECT device creation page.
 
-18. Click the "Save and View" button to go to the page for your new device.
+17. Click the "Save and View" button to go to the page for your new device.
 
-19. Now on your device's page in /IOTCONNECT, click on the black/white/green paper-and-cog icon in the top-right of the
+18. Now on your device's page in /IOTCONNECT, click on the black/white/green paper-and-cog icon in the top-right of the
     device page (just above "Connection Info") to download your device's configuration file.
 
-20. Open the configuration file in a text editor and copy its entirety to your clipboard.
+19. Open the configuration file in a text editor and copy its entirety to your clipboard.
 
-21. Back in the terminal of your Arduino, paste **(using RIGHT-CLICK, because CTRL+V does not work in the App Lab Terminal)** 
+20. Back in the terminal of your Arduino, paste **(using RIGHT-CLICK, because CTRL+V does not work in the App Lab Terminal)** 
 the contents (of the configuration file from your clipboard as instructed by the next step of the script, and then press ENTER.
 
-22. The onboarding process is complete. 
+21. The onboarding process is complete. 
 
 
 ## 4. Set Up /IOTCONNECT SDK and Relay Service
 
-Run these commands to install the /IOTCONNECT Python Lite SDK and then download and configure the /IOTCONNECT Relay Service.
+Run this command to install the /IOTCONNECT Python Lite SDK and then download and configure the /IOTCONNECT Relay Service.
 
 ```bash
-cd /home/arduino/iotc-arduino-uno-q-workshop
-sudo ./scripts/unoq_setup.sh
+sudo /home/arduino/iotc-arduino-uno-q-workshop/scripts/unoq_setup.sh
 ```
 
 >[!NOTE]
