@@ -9,7 +9,6 @@ set -e
 export MSYS_NO_PATHCONV=1
 
 OUTDIR="/opt/demo"
-mkdir -p "${OUTDIR}"
 
 function askyn {
     if [ -z "$1" ]; then

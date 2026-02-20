@@ -47,6 +47,7 @@ Run these commands to clone this repository onto your Arduino to get access to t
 
 ```bash
 cd /home/arduino
+sudo mkdir -p /opt/demo && sudo chown $USER /opt/demo
 
 git clone https://github.com/avnet-iotconnect/iotc-arduino-uno-q-workshop.git
 cd iotc-arduino-uno-q-workshop
@@ -102,7 +103,7 @@ cd /home/arduino/iotc-arduino-uno-q-workshop/scripts
 15. Execute the automated device credentials script with this command:
 
 ```
-sudo bash ./credentials.sh
+bash ./credentials.sh
 ```
 
 16. If you generated a new certificate, when prompted, press ENTER to print it.  
@@ -136,14 +137,6 @@ sudo ./scripts/unoq_setup.sh
 >[!NOTE]
 > If during the setup script a pop-up appears asking if you would like to restart select device services, simply press 
 > ENTER.
-
-Ensure credential file permissions allow the `iotc-relay` service user (`arduino`) to read them:
-
-```bash
-sudo chown arduino:arduino /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert.pem /opt/demo/device-pkey.pem
-sudo chmod 644 /opt/demo/iotcDeviceConfig.json /opt/demo/device-cert.pem
-sudo chmod 600 /opt/demo/device-pkey.pem
-```
 
 ## 5. Choose a Lab Example, Clone It, and Copy the /IOTCONNECT Files
 
