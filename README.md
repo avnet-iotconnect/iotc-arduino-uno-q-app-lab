@@ -136,13 +136,13 @@ In Arduino App Lab:
 4) Name your copy of the app (ideally similar to the app names in this repo)
 5) Copy the /IOTCONNECT-enabled python files and relay client from the workshop repo into the app:
    ```bash
-   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/<example>/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/ && \
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
 > [!TIP]
 > For example, if you were using the "blink" app and you had named your copy "my-blink-app", your commands would be:
 >   ```bash
->   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/blink/python/* /home/arduino/ArduinoApps/my-blink-app/python/
+>   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/blink/python/* /home/arduino/ArduinoApps/my-blink-app/python/ && \
 >   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/my-blink-app/python/
 >   ```
 

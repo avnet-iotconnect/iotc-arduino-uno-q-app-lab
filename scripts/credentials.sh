@@ -85,7 +85,7 @@ else
 fi
 
 cat <<END
----- IoTConnect Python Lite Certificate Script ----
+---- /IOTCONNECT Python Lite Certificate Script ----
 This script will use and format ${cert_action} device credentials for your Arduino Uno Q
 to help onboard it into /IOTCONNECT.
 END
