@@ -46,11 +46,9 @@ Run these commands to clone this repository onto your Arduino to get access to t
 > Users can paste into the Arduino App Lab terminal using **RIGHT-CLICK**. Using CTRL+V is not supported in the App Lab Terminal.
 
 ```bash
-sudo mkdir -p /opt/demo && sudo chown $USER /opt/demo
-
-git clone https://github.com/avnet-iotconnect/iotc-arduino-uno-q-workshop.git /home/arduino
-
-chmod +x iotc-arduino-uno-q-workshop/scripts/*.sh
+sudo mkdir -p /opt/demo && sudo chown $USER /opt/demo && \
+git clone https://github.com/avnet-iotconnect/iotc-arduino-uno-q-workshop.git /home/arduino/iotc-arduino-uno-q-workshop && \
+chmod +x /home/arduino/iotc-arduino-uno-q-workshop/scripts/*.sh
 ```
 
 
