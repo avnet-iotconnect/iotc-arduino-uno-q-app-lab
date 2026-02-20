@@ -176,7 +176,7 @@ Use these /IOTCONNECT-specific guides:
 - [code-detector](app-configs/code-detector/README.md) `[AH]`
 - [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md) `[DB]` `[AH]`
 - [image-classification](app-configs/image-classification/README.md) `[DB]`
-- [keyword-spotting](app-configs/keyword-spotting/README.md)
+- [keyword-spotting](app-configs/keyword-spotting/README.md)  `[AH]`
 - [led-matrix-painter](app-configs/led-matrix-painter/README.md)
 - [mascot-jump-game](app-configs/mascot-jump-game/README.md)
 - [object-detection](app-configs/object-detection/README.md) `[DB]`
