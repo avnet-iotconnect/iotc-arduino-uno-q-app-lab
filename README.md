@@ -163,6 +163,7 @@ Use these /IOTCONNECT-specific guides:
 
 >[!NOTE]
 >`[DB]` = dashboard image and exported /IOTCONNECT dashboard JSON template available in the example's folder.
+> 
 >`[AH]` = additional hardware (not provided with standard Arduino Uno Q) is required for this app.
 
 - [air-quality-monitoring](app-configs/air-quality-monitoring/README.md) `[DB]`
@@ -182,9 +183,9 @@ Use these /IOTCONNECT-specific guides:
 - [object-hunting](app-configs/object-hunting/README.md) `[AH]`
 - [real-time-accelerometer](app-configs/real-time-accelerometer/README.md) `[DB]` `[AH]`
 - [system-resources-logger](app-configs/system-resources-logger/README.md) `[DB]`
-- [theremin](app-configs/theremin/README.md)
+- [theremin](app-configs/theremin/README.md) `[AH]`
 - [unoq-pin-toggle](app-configs/unoq-pin-toggle/README.md)
-- [vibration-anomaly-detection](app-configs/vibration-anomaly-detection/README.md) `[DB]`
+- [vibration-anomaly-detection](app-configs/vibration-anomaly-detection/README.md) `[DB]` `[AH]`
 - [video-face-detection](app-configs/video-face-detection/README.md) `[DB]` `[AH]`
 - [video-generic-object-detection](app-configs/video-generic-object-detection/README.md) `[DB]` `[AH]`
 - [video-person-classification](app-configs/video-person-classification/README.md) `[DB]` `[AH]`

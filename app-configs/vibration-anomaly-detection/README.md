@@ -20,6 +20,16 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `config.json` (telemetry/command definitions)
 
+## Additional Hardware Required
+
+This app requires a Modulino Movement sensor and a Qwiic cable to connect it to the Arduino Uno Q.
+
+**Modulino Movement Sensor:**
+- [Arduino Modulino Movement](https://store.arduino.cc/products/modulino-movement)
+
+**Qwiic Cable:**
+- [elechawk Qwiic Cable](https://www.amazon.com/elechawk/SparkFun-Development-Breadboard-Connector/dp/B08HQ1VSVL)
+
 ## Device Template
 This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
 - Template code: `arduino`

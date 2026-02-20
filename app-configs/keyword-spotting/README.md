@@ -20,6 +20,19 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `config.json` (telemetry/command definitions)
 
+## Additional Hardware Required
+
+This app requires a USB microphone and a powered USB hub (since the Arduino Uno Q has a single USB-C port used for power).
+
+**USB Microphone:**
+- Any generic USB Microphone
+
+**Powered USB Hub Recommendations:**
+- [Sabrent 4-Port USB Hub](https://www.amazon.com/dp/B07H2ZS1B5?ref=cm_sw_r_cp_ud_dp_700AHY8JWV8DF6AR7V2Q&ref_=cm_sw_r_cp_ud_dp_700AHY8JWV8DF6AR7V2Q&social_share=cm_sw_r_cp_ud_dp_700AHY8JWV8DF6AR7V2Q&th=1)
+
+> [!IMPORTANT]
+> When using a powered USB hub, Arduino App Lab will no longer recognize the board via USB. You will need to connect to the board using the **Network** option instead.
+
 ## Device Template
 This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
 - Template code: `arduino`
