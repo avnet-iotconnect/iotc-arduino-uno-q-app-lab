@@ -51,7 +51,6 @@ echo "Installed iotc_relay_client.py -> $SITE_PACKAGES"
 chmod +x "$DEMO_DIR/iotc-relay-server.py"
 
 set +e
-python3 -m pip install --break-system-packages --upgrade pip
 python3 -m pip install --break-system-packages iotconnect-sdk-lite
 set -e
 
