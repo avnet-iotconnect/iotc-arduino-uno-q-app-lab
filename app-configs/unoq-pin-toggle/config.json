@@ -15,17 +15,63 @@
             "type": "STRING"
         },
         {
+            "name": "sw_version",
+            "type": "STRING"
+        },
+        {
             "name": "pin_name",
             "type": "STRING"
         },
         {
             "name": "pin_state",
-            "type": "STRING"
+            "type": "OBJECT",
+            "childs": [
+                {
+                    "name": "D0_D3",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "D4_D7",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "D8_D11",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "D12_D21",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "A0_A2",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "A3_A5",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "LED3",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "LED4",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "LED3_color",
+                    "type": "STRING"
+                },
+                {
+                    "name": "LED4_color",
+                    "type": "STRING"
+                }
+            ]
         },
         {
             "name": "status",
             "type": "STRING"
         }
     ],
-    "notes": "Pin toggle telemetry"
+    "notes": "Pin toggle telemetry. pin_state is an OBJECT with packed bitfields and LED color/pattern notes."
 }
