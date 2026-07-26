@@ -1,0 +1,153 @@
+{
+    "enableCSR": "false",
+    "msgCode": "TODO",
+    "_meta": {
+        "version": "2.0"
+    },
+    "messageVersion": "2.1",
+    "c2dOnDemand": 0,
+    "properties": {
+        "fileSupport": false,
+        "description": null,
+        "dataFrequency": "5",
+        "enableCSR": false,
+        "certRenewalDay": 0
+    },
+    "commands": [
+        {
+            "name": "set-pin",
+            "command": "set-pin",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        }
+    ],
+    "name": "UnoQUnoqPinToggle",
+    "capability": "0",
+    "authType": 2,
+    "code": "UnoQUPT",
+    "attributes": [
+        {
+            "name": "UnoQdemo",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "sw_version",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "pin_name",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "pin_state",
+            "displayName": "",
+            "type": "OBJECT",
+            "description": "",
+            "unit": "",
+            "childs": [
+                {
+                    "name": "D0_D3",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "4-bit status, 16 states",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "D4_D7",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "4-bit status, 16 states",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "D8_D11",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "4-bit status, 16 states",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "D12_D21",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "4-bit status, 16 states  D12, D13, D20, D21",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "A0_A2",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "3-bit status, 8 states",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "A3_A5",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "3-bit status, 8 states",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED3",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "3-bit status, 8 states",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED4",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "3-bit status, 8 states",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED3_color",
+                    "displayName": "",
+                    "type": "STRING",
+                    "description": "note color, off, or pattern",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED4_color",
+                    "displayName": "",
+                    "type": "STRING",
+                    "description": "note color, off, or pattern",
+                    "unit": "",
+                    "attributeColor": ""
+                }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        }
+    ]
+}
