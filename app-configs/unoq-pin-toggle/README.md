@@ -87,12 +87,6 @@ Status values:
    ```
 3) Run the app and verify telemetry in /IOTCONNECT.
 
-## /IOTCONNECT Setup Checklist
-- Create or select the device template using the fields above.
-- Create a device bound to that template.
-- Download `iotcDeviceConfig.json`, `device-cert.pem`, and `device-pkey.pem`.
-- Copy those files to `/home/arduino/demo` on the UNO Q.
-
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
