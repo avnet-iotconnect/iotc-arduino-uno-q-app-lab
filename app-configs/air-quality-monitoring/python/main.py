@@ -17,7 +17,9 @@ UNOQ_DEMO_NAME = "air-quality-monitoring"
 IOTC_INTERVAL_SEC = 5
 IOTC_LAST_SEND = 0.0
 
-# Insert your API token here
+# Insert your API token here. Get a free one at https://aqicn.org/data-platform/token/
+# The public "demo" token always returns the same fixed Shanghai sample data
+# regardless of city, so you need a real token for distinct per-city data.
 API_TOKEN = "demo"
 
 # Default city

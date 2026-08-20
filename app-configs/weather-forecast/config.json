@@ -36,5 +36,5 @@
             ]
         }
     ],
-    "notes": "Send telemetry from get_weather_forecast(city) when implemented"
+    "notes": "Telemetry is sent periodically via a user_loop calling get_weather_forecast(city)"
 }

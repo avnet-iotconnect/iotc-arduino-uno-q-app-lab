@@ -73,4 +73,12 @@ def get_weather_forecast(city: str) -> str:
 
 Bridge.provide("get_weather_forecast", get_weather_forecast)
 
-App.run()
+DEFAULT_CITY = "Turin"
+
+
+def weather_forecast_loop():
+    get_weather_forecast(DEFAULT_CITY)
+    time.sleep(IOTC_INTERVAL_SEC)
+
+
+App.run(user_loop=weather_forecast_loop)

@@ -59,11 +59,16 @@ Import into /IOTCONNECT:
    cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/air-quality-monitoring/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
-3) Run the app and verify telemetry in /IOTCONNECT.
+3) Get a free AQICN API token at https://aqicn.org/data-platform/token/ (just an email address, delivered instantly) and replace `"demo"` with your token on line 21 of `python/main.py`:
+   ```python
+   API_TOKEN = "demo"  # <-- replace "demo" with your real token
+   ```
+4) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
+- The default `API_TOKEN = "demo"` in `main.py` does **not** return real per-city data — it always returns the same fixed Shanghai sample reading (`aqi: 42`) for any recognized city name, and `"Unknown station"` for anything it doesn't recognize. Replace it with a real token (step 3 above) to get distinct air quality data for different cities.
 
 
 
