@@ -63,6 +63,9 @@ Import into /IOTCONNECT:
    ```python
    API_TOKEN = "demo"  # <-- replace "demo" with your real token
    ```
+> [!TIP]
+> App file editing can be done directly in the Arduino App Lab interface on the same page you Run/Stop the app from. The file automatically saves to the board.
+
 4) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes
