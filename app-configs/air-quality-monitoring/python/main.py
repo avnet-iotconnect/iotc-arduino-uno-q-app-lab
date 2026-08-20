@@ -142,4 +142,10 @@ def get_air_quality():
 
 Bridge.provide("get_air_quality", get_air_quality)
 
-App.run()
+
+def air_quality_loop():
+    get_air_quality()
+    time.sleep(IOTC_INTERVAL_SEC)
+
+
+App.run(user_loop=air_quality_loop)
