@@ -1,0 +1,102 @@
+{
+    "commands": [
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
+        }
+    ],
+    "example": "mobile-remote-sensor",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "interval_sec",
+            "type": "INTEGER"
+        },
+        {
+            "name": "state",
+            "type": "STRING"
+        },
+        {
+            "name": "x",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "y",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "z",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "gyro_x",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "gyro_y",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "gyro_z",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "mag_x",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "mag_y",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "mag_z",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "compass",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "barometer",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "brightness",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "battery",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "sound_level",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "sound_pitch",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "lat",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "lon",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "sensor_json",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Smartphone sensor telemetry (rate-limited); x/y/z are the phone accelerometer"
+}
