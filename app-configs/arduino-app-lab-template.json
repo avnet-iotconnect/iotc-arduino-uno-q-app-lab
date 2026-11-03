@@ -638,9 +638,91 @@
         {
             "name": "pin_state",
             "displayName": "",
-            "type": "STRING",
+            "type": "OBJECT",
             "description": "",
             "unit": "",
+            "childs": [
+                {
+                    "name": "D0_D3",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "D4_D7",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "D8_D11",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "D12_D21",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "A0_A2",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "A3_A5",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED3",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED4",
+                    "displayName": "",
+                    "type": "INTEGER",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED3_color",
+                    "displayName": "",
+                    "type": "STRING",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "LED4_color",
+                    "displayName": "",
+                    "type": "STRING",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
+            ],
             "aggregateTypes": []
         },
         {
@@ -783,6 +865,14 @@
             "name": "step_count",
             "displayName": "",
             "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "sw_version",
+            "displayName": "",
+            "type": "STRING",
             "description": "",
             "unit": "",
             "aggregateTypes": []
