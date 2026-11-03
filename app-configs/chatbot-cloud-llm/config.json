@@ -1,0 +1,58 @@
+{
+    "commands": [
+        {
+            "name": "ask",
+            "parameters": [
+                "prompt"
+            ]
+        },
+        {
+            "name": "clear-chat",
+            "parameters": []
+        }
+    ],
+    "example": "chatbot-cloud-llm",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "model",
+            "type": "STRING"
+        },
+        {
+            "name": "source",
+            "type": "STRING"
+        },
+        {
+            "name": "message_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "prompt_preview",
+            "type": "STRING"
+        },
+        {
+            "name": "prompt_chars",
+            "type": "INTEGER"
+        },
+        {
+            "name": "response_preview",
+            "type": "STRING"
+        },
+        {
+            "name": "response_chars",
+            "type": "INTEGER"
+        },
+        {
+            "name": "processing_time_ms",
+            "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Cloud LLM chat telemetry: one message when a prompt is requested and one when the response completes"
+}
