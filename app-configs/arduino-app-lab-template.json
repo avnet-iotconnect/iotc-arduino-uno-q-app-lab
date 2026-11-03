@@ -92,6 +92,38 @@
             "aggregateTypes": []
         },
         {
+            "name": "barometer",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "battery",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "bpm",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "brightness",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "character_count",
             "displayName": "",
             "type": "INTEGER",
@@ -159,6 +191,14 @@
             "name": "code_type",
             "displayName": "",
             "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "compass",
+            "displayName": "",
+            "type": "DECIMAL",
             "description": "",
             "unit": "",
             "aggregateTypes": []
@@ -252,6 +292,14 @@
             "aggregateTypes": []
         },
         {
+            "name": "effects_json",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "ending_type",
             "displayName": "",
             "type": "STRING",
@@ -311,6 +359,30 @@
             "name": "game_over",
             "displayName": "",
             "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "gyro_x",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "gyro_y",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "gyro_z",
+            "displayName": "",
+            "type": "DECIMAL",
             "description": "",
             "unit": "",
             "aggregateTypes": []
@@ -404,9 +476,97 @@
             "aggregateTypes": []
         },
         {
+            "name": "lat",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "led1_color",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "led2_color",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "led3_color",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "led4_color",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "led_color",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "led_id",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "led_state",
             "displayName": "",
             "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "lon",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "mag_x",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "mag_y",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "mag_z",
+            "displayName": "",
+            "type": "DECIMAL",
             "description": "",
             "unit": "",
             "aggregateTypes": []
@@ -428,9 +588,41 @@
             "aggregateTypes": []
         },
         {
+            "name": "message_count",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "model",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "mood",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "narrative_structure",
             "displayName": "",
             "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "note_count",
+            "displayName": "",
+            "type": "INTEGER",
             "description": "",
             "unit": "",
             "aggregateTypes": []
@@ -460,6 +652,38 @@
             "aggregateTypes": []
         },
         {
+            "name": "prompt_chars",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "prompt_preview",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "response_chars",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "response_preview",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "results_json",
             "displayName": "",
             "type": "STRING",
@@ -484,7 +708,39 @@
             "aggregateTypes": []
         },
         {
+            "name": "sender_name",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "sensor_json",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "snake",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "sound_level",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "sound_pitch",
             "displayName": "",
             "type": "DECIMAL",
             "description": "",
@@ -519,6 +775,14 @@
             "name": "status",
             "displayName": "",
             "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "step_count",
+            "displayName": "",
+            "type": "INTEGER",
             "description": "",
             "unit": "",
             "aggregateTypes": []
@@ -604,6 +868,14 @@
             "aggregateTypes": []
         },
         {
+            "name": "waveform",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "x",
             "displayName": "",
             "type": "DECIMAL",
@@ -630,9 +902,23 @@
     ],
     "commands": [
         {
+            "name": "ask",
+            "command": "ask",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
             "name": "classify-image",
             "command": "classify-image",
             "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "clear-chat",
+            "command": "clear-chat",
+            "requiredParam": false,
             "requiredAck": true,
             "isOTACommand": false
         },
@@ -647,6 +933,13 @@
             "name": "detect-objects",
             "command": "detect-objects",
             "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "play",
+            "command": "play",
+            "requiredParam": false,
             "requiredAck": true,
             "isOTACommand": false
         },
@@ -679,6 +972,13 @@
             "isOTACommand": false
         },
         {
+            "name": "send-message",
+            "command": "send-message",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
             "name": "set-amp",
             "command": "set-amp",
             "requiredParam": true,
@@ -688,6 +988,13 @@
         {
             "name": "set-auto",
             "command": "set-auto",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "set-bpm",
+            "command": "set-bpm",
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
@@ -745,6 +1052,20 @@
             "name": "set-volume",
             "command": "set-volume",
             "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "set-waveform",
+            "command": "set-waveform",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "stop",
+            "command": "stop",
+            "requiredParam": false,
             "requiredAck": true,
             "isOTACommand": false
         }

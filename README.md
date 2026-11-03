@@ -161,17 +161,24 @@ Use these /IOTCONNECT-specific guides:
 - [bedtime-story-teller](app-configs/bedtime-story-teller/README.md)
 - [blink](app-configs/blink/README.md)
 - [blink-with-ui](app-configs/blink-with-ui/README.md)
+- [chatbot-cloud-llm](app-configs/chatbot-cloud-llm/README.md)
 - [cloud-blink](app-configs/cloud-blink/README.md)
 - [code-detector](app-configs/code-detector/README.md) `[AH]`
+- [color-your-leds](app-configs/color-your-leds/README.md)
+- [edge-ai-assistant](app-configs/edge-ai-assistant/README.md)
 - [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md) `[DB]` `[AH]`
 - [image-classification](app-configs/image-classification/README.md) `[DB]`
 - [keyword-spotting](app-configs/keyword-spotting/README.md)  `[AH]`
 - [led-matrix-painter](app-configs/led-matrix-painter/README.md)
 - [mascot-jump-game](app-configs/mascot-jump-game/README.md)
+- [mobile-remote-sensor](app-configs/mobile-remote-sensor/README.md) `[AH]`
+- [mobile-video-generic-object-detection](app-configs/mobile-video-generic-object-detection/README.md) `[AH]`
+- [music-composer](app-configs/music-composer/README.md) `[AH]`
 - [object-detection](app-configs/object-detection/README.md) `[DB]`
 - [object-hunting](app-configs/object-hunting/README.md) `[AH]`
 - [real-time-accelerometer](app-configs/real-time-accelerometer/README.md) `[DB]` `[AH]`
 - [system-resources-logger](app-configs/system-resources-logger/README.md) `[DB]`
+- [telegram-bot](app-configs/telegram-bot/README.md)
 - [theremin](app-configs/theremin/README.md) `[AH]`
 - [unoq-pin-toggle](app-configs/unoq-pin-toggle/README.md)
 - [vibration-anomaly-detection](app-configs/vibration-anomaly-detection/README.md) `[DB]` `[AH]`
