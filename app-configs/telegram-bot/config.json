@@ -1,0 +1,46 @@
+{
+    "commands": [
+        {
+            "name": "send-message",
+            "parameters": [
+                "text"
+            ]
+        }
+    ],
+    "example": "telegram-bot",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "action",
+            "type": "STRING"
+        },
+        {
+            "name": "sender_name",
+            "type": "STRING"
+        },
+        {
+            "name": "message_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "mood",
+            "type": "STRING"
+        },
+        {
+            "name": "detection_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "detections_json",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Telegram bot telemetry: one message per handled chat event (hello, help, text, photo, send-message)"
+}
