@@ -77,6 +77,17 @@ Import into /IOTCONNECT:
    cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/image-classification/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
+   **Or, with the /IOTCONNECT brick** (same telemetry and commands, no code changes; the brick replaces the relay client copy):
+   ```bash
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/image-classification/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
+   ```
+   A version written directly against the brick's API is in [`brick/main.py`](brick/main.py): copy it over `python/main.py`
+   (`cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/image-classification/brick/main.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/main.py`)
+   and run the same installer line.
+   With the unchanged `python/main.py`, `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --remove`
+   goes back to the classic relay client; if you copied `brick/main.py`, first copy the original back:
+   `cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/image-classification/python/main.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/main.py`.
 3) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes

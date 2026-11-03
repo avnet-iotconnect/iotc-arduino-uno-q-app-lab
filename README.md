@@ -10,6 +10,12 @@ Avnet's robust IoT platform to run IoT-connected Arduino App Lab demos.
 5. [Choose a Lab Example, Clone It, and Copy the /IOTCONNECT Files](#5-choose-a-lab-example-clone-it-and-copy-the-iotconnect-files)
 6. [Run the App and Confirm Telemetry](#6-run-the-app-and-confirm-telemetry)
 
+> [!TIP]
+> **Connecting your own app?** This repo also ships the [/IOTCONNECT brick](bricks/iotconnect/README.md), an App Lab
+> custom brick that gives any app telemetry and cloud commands in a few lines of Python. Complete sections 2 and 3,
+> then run `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>` on the board. The relay service of section 4 is optional with
+> the brick. [`examples/iotconnect-blink`](examples/iotconnect-blink/README.md) is a complete app using it.
+
 ## 1. Install Arduino App Lab on Host Machine
 
 First, install Arduino App Lab on your PC:
@@ -120,6 +126,11 @@ the contents (of the configuration file from your clipboard as instructed by the
 
 ## 4. Set Up /IOTCONNECT SDK and Relay Service
 
+> [!NOTE]
+> This step is required for the examples under `app-configs/`, which talk to the cloud through the relay service.
+> Apps that use the [/IOTCONNECT brick](bricks/iotconnect/README.md) can skip it: the brick connects on its own
+> (direct mode), or uses the relay when it is installed (relay mode).
+
 Run this command to install the /IOTCONNECT Python Lite SDK and then download and configure the /IOTCONNECT Relay Service.
 
 ```bash
@@ -131,6 +142,49 @@ sudo /home/arduino/iotc-arduino-uno-q-workshop/scripts/unoq_setup.sh
 > ENTER.
 
 ## 5. Choose a Lab Example, Clone It, and Copy the /IOTCONNECT Files
+
+There are two ways to put an App Lab app on /IOTCONNECT:
+
+- **Option A, the /IOTCONNECT brick**: for your own apps or any upstream example. Add the brick, then write the
+  telemetry and command code yourself with its small API. See [bricks/iotconnect/README.md](bricks/iotconnect/README.md).
+- **Option B, the ready-made examples** below: each folder under `app-configs/` holds a `main.py` already wired to
+  the cloud, plus the matching device template and dashboard. They run on the relay client of section 4 or,
+  unchanged, on the brick (step 6).
+
+### Option A: add the /IOTCONNECT brick to an app
+
+In Arduino App Lab, create a new app or copy an example ("Copy and edit app"), then in the App Lab terminal:
+
+```bash
+bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
+```
+
+The script copies the brick into the app, lists it in `app.yaml` and either copies the device credentials into the
+app or points it at the relay service, depending on whether the relay from section 4 is running. Then add to
+`python/main.py`:
+
+```python
+import time
+
+from arduino.app_utils import App
+from iotconnect import IoTConnect
+
+iotc = IoTConnect()
+iotc.on_command("set-led", lambda args: print("set-led", args))  # optional
+
+
+def loop() -> None:
+    iotc.send_telemetry({"status": "ok"})  # from your loop or a command handler, once App.run() is running
+    time.sleep(5)
+
+
+App.run(user_loop=loop)
+```
+
+[`examples/iotconnect-blink`](examples/iotconnect-blink/README.md) is a complete app built this way. Make sure the
+device template contains the attributes and commands your app uses (the master template covers the examples here).
+
+### Option B: copy a ready-made example
 
 In Arduino App Lab:
 1) Browse the example applications after clicking "Examples" in the vertical toolbar on the left.
@@ -148,6 +202,17 @@ In Arduino App Lab:
 >   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/blink/python/* /home/arduino/ArduinoApps/my-blink-app/python/ && \
 >   cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/my-blink-app/python/
 >   ```
+
+6) Or let the /IOTCONNECT brick do the relay client's job (same `main.py`, same telemetry and commands, no code
+   changes): copy the python files as above, then run the installer instead of copying the relay client:
+   ```bash
+   bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
+   ```
+   Each example README shows both lines. `add_iotconnect_brick.sh <APP_LAB_FOLDER> --remove` puts the classic
+   relay client back (with the unchanged `main.py`; if you copied a `brick/main.py`, copy the example's `python/main.py`
+   back first). Two examples also ship a `brick/main.py` written directly against the brick's API:
+   [image-classification](app-configs/image-classification/brick/main.py) and
+   [object-hunting](app-configs/object-hunting/brick/main.py).
 
 ### Examples Index
 

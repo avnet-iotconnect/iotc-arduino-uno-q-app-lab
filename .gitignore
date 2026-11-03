@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+# device credentials copied into an app by scripts/add_iotconnect_brick.sh
+data/iotconnect/
+**/data/iotconnect/
+# App Lab runtime cache
+.cache/

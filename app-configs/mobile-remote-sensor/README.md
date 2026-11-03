@@ -80,6 +80,12 @@ The phone streams many datapoints per second; telemetry is rate-limited to one m
 
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
+   **Or, with the /IOTCONNECT brick** (same telemetry and commands, no code changes; the brick replaces the relay client copy):
+   ```bash
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/mobile-remote-sensor/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
+   ```
+   Either way, `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --remove` goes back to the classic relay client.
 3) Run the app, pair the phone from the web UI, and verify telemetry in /IOTCONNECT.
 
 ## Notes

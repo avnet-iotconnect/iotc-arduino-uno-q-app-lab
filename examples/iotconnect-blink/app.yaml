@@ -1,0 +1,5 @@
+name: /IOTCONNECT Blink
+icon: ☁️
+description: Blinks the LED from Python, publishes the LED state to /IOTCONNECT and takes set-led / set-interval commands from the cloud.
+bricks:
+  - iotconnect

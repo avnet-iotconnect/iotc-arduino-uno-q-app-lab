@@ -1,0 +1,24 @@
+id: iotconnect
+name: /IOTCONNECT
+description: "Connects the app to Avnet /IOTCONNECT: publish telemetry, receive cloud-to-device commands and OTA requests. Uses device credentials inside the app (direct mode) or the board's iotc-relay service (relay mode)."
+category: miscellaneous
+variables:
+  - name: IOTC_MODE
+    description: "auto, direct or relay. auto uses direct when the credential files are present, otherwise relay."
+    default_value: auto
+  - name: IOTC_CREDENTIALS_DIR
+    description: "Folder with iotcDeviceConfig.json, device-cert.pem and device-pkey.pem (direct mode). /app is the app folder inside the container."
+    default_value: /app/data/iotconnect
+  - name: IOTC_RELAY_ENDPOINT
+    description: "iotc-relay endpoint (relay mode): tcp://host:port or a unix socket path."
+    default_value: tcp://172.17.0.1:8899
+  - name: IOTC_CLIENT_ID
+    description: "Name this app registers with the relay (relay mode). auto = the app folder name."
+    default_value: auto
+  - name: IOTC_SEND_INTERVAL
+    description: "Seconds between telemetry transmissions. 0 sends every call immediately; a positive value merges values and sends one message per interval."
+    default_value: 0
+  - name: IOTC_SERVER_CA_CERT
+    description: "CA certificate path used to verify the MQTT broker (direct mode). system = the system trust store."
+    default_value: system
+    hidden: true

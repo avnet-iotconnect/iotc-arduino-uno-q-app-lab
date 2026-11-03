@@ -89,6 +89,12 @@ Status values:
 
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
+   **Or, with the /IOTCONNECT brick** (same telemetry and commands, no code changes; the brick replaces the relay client copy):
+   ```bash
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/unoq-pin-toggle/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
+   ```
+   Either way, `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --remove` goes back to the classic relay client.
 3) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes

@@ -63,6 +63,12 @@ Import into /IOTCONNECT:
    cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/air-quality-monitoring/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    cp /opt/demo/iotc_relay_client.py /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
    ```
+   **Or, with the /IOTCONNECT brick** (same telemetry and commands, no code changes; the brick replaces the relay client copy):
+   ```bash
+   cp /home/arduino/iotc-arduino-uno-q-workshop/app-configs/air-quality-monitoring/python/* /home/arduino/ArduinoApps/<APP_LAB_FOLDER>/python/
+   bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
+   ```
+   Either way, `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --remove` goes back to the classic relay client.
 3) Get a free AQICN API token at https://aqicn.org/data-platform/token/ (just an email address, delivered instantly) and replace `"demo"` with your token on line 21 of `python/main.py`:
    ```python
    API_TOKEN = "demo"  # <-- replace "demo" with your real token
