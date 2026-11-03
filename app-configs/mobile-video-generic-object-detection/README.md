@@ -29,9 +29,13 @@ This app runs object detection on a live feed from a smartphone camera instead o
 - On the same network as the UNO Q (the app pairs by scanning the QR code shown in the web UI)
 
 ## Device Template
-This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
+Quickstart: use the shared master template at `app-configs/arduino-app-lab-template.json`. It is imported once during onboarding and contains the telemetry fields and commands of every example, so a single device can run all of them.
 - Template code: `arduino`
 - Template name: `arduino`
+
+Optional: `device-template.json` in this folder is a per-example template containing only this app's fields. Import it and bind a separate device to it if you prefer one template per example.
+- Template code: `UnoQMVGOD`
+- Template name: `UnoQMobileVideoGenericOb`
 
 ## Telemetry Fields
 | Field | Type |

@@ -454,7 +454,7 @@
         {
             "name": "interval_sec",
             "displayName": "",
-            "type": "INTEGER",
+            "type": "DECIMAL",
             "description": "",
             "unit": "s",
             "aggregateTypes": []

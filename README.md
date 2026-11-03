@@ -77,6 +77,9 @@ conjunction with an automated bash script. Follow these steps to complete the pr
 
 7. Select your downloaded copy of the template from sub-step 4 and then click "save".
 
+> [!NOTE]
+> The master template contains the telemetry fields and commands of every example in this repo, so a single device can run all of them. Each example folder also includes an optional `device-template.json` with only that example's fields; its template code is listed under "Device Template" in the example's README. If you use one, select it instead of "arduino" in sub-step 12.
+
 8. Click on the "Devices" tab of the blue toolbar at the bottom of the screen.
 
 9. In the resulting page, click on the "Create Device" button in the top-right of the screen.

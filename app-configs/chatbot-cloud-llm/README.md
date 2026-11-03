@@ -23,9 +23,13 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 The upstream `python/system_prompt.txt` is used unchanged from your App Lab copy of the example.
 
 ## Device Template
-This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
+Quickstart: use the shared master template at `app-configs/arduino-app-lab-template.json`. It is imported once during onboarding and contains the telemetry fields and commands of every example, so a single device can run all of them.
 - Template code: `arduino`
 - Template name: `arduino`
+
+Optional: `device-template.json` in this folder is a per-example template containing only this app's fields. Import it and bind a separate device to it if you prefer one template per example.
+- Template code: `UnoQCCL`
+- Template name: `UnoQChatbotCloudLlm`
 
 ## Telemetry Fields
 | Field | Type |

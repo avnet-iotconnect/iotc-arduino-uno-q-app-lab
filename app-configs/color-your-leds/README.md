@@ -21,9 +21,13 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 - `config.json` (telemetry/command definitions)
 
 ## Device Template
-This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
+Quickstart: use the shared master template at `app-configs/arduino-app-lab-template.json`. It is imported once during onboarding and contains the telemetry fields and commands of every example, so a single device can run all of them.
 - Template code: `arduino`
 - Template name: `arduino`
+
+Optional: `device-template.json` in this folder is a per-example template containing only this app's fields. Import it and bind a separate device to it if you prefer one template per example.
+- Template code: `UnoQCYL`
+- Template name: `UnoQColorYourLeds`
 
 ## Telemetry Fields
 | Field | Type |

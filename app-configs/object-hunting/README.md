@@ -39,9 +39,13 @@ This app requires a USB camera and a powered USB hub (since the Arduino Uno Q ha
 > When using a powered USB hub, Arduino App Lab will no longer recognize the board via USB. You will need to connect to the board using the **Network** option instead.
 
 ## Device Template
-This app uses the shared device template at `app-configs/arduino-app-lab-template.json`.
+Quickstart: use the shared master template at `app-configs/arduino-app-lab-template.json`. It is imported once during onboarding and contains the telemetry fields and commands of every example, so a single device can run all of them.
 - Template code: `arduino`
 - Template name: `arduino`
+
+Optional: `device-template.json` in this folder is a per-example template containing only this app's fields. Import it and bind a separate device to it if you prefer one template per example.
+- Template code: `UnoQOH`
+- Template name: `UnoQObjectHunting`
 
 ## Telemetry Fields
 | Field | Type |
