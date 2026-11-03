@@ -3,7 +3,7 @@
 This is the /IOTCONNECT-enabled version of the Arduino example.
 
 Original Arduino README:
-- https://github.com/arduino/app-bricks-examples/blob/main/examples/unoq-pin-toggle/README.md
+- https://github.com/arduino/app-bricks-examples/blob/main/inspirational/platform_unoq/unoq-pin-toggle/README.md
 
 ## Overview
 This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.
