@@ -1,0 +1,70 @@
+{
+    "commands": [
+        {
+            "name": "play",
+            "parameters": []
+        },
+        {
+            "name": "stop",
+            "parameters": []
+        },
+        {
+            "name": "set-bpm",
+            "parameters": [
+                "bpm"
+            ]
+        },
+        {
+            "name": "set-volume",
+            "parameters": [
+                "volume"
+            ]
+        },
+        {
+            "name": "set-waveform",
+            "parameters": [
+                "waveform"
+            ]
+        }
+    ],
+    "example": "music-composer",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "state",
+            "type": "STRING"
+        },
+        {
+            "name": "bpm",
+            "type": "INTEGER"
+        },
+        {
+            "name": "waveform",
+            "type": "STRING"
+        },
+        {
+            "name": "volume",
+            "type": "INTEGER"
+        },
+        {
+            "name": "step_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "note_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "effects_json",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Step-sequencer telemetry on play/stop and setting changes; grid edits are rate-limited"
+}
