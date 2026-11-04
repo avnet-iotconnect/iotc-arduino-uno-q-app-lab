@@ -11,7 +11,8 @@
 #   --direct       Copy the device credentials into the app (data/iotconnect): the app connects on its own
 #   --relay        Use the board's iotc-relay service (workshop section 4): no credentials in the app
 #   --auto         Default: --relay when the iotc-relay service is running, --direct otherwise
-#   --creds-from   Where the credentials are (default /opt/demo, written by scripts/credentials.sh)
+#   --creds-from   Where the credentials are (default: /opt/demo, or $HOME/.iotconnect when /opt/demo has none;
+#                  scripts/credentials.sh writes to the same two places)
 #   --remove       Take the brick out of the app again and restore the classic relay client copy
 #
 # The script copies bricks/iotconnect into the app and lists the brick in app.yaml. An app written for the
@@ -23,7 +24,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BRICK_SRC="$SCRIPT_DIR/../bricks/iotconnect"
 APPS_DIR="${ARDUINO_APPS_DIR:-$HOME/ArduinoApps}"
-CREDS_DIR="/opt/demo"
+CREDS_DIR="/opt/demo" # scripts/credentials.sh writes here on the UNO Q (README section 3)...
+[[ -f "/opt/demo/iotcDeviceConfig.json" ]] || CREDS_DIR="$HOME/.iotconnect" # ...or here when /opt/demo is not writable (VENTUNO Q)
 CLASSIC_CLIENT="/opt/demo/iotc_relay_client.py" # installed by scripts/unoq_setup.sh
 CRED_FILES=(iotcDeviceConfig.json device-cert.pem device-pkey.pem)
 SHIM_MARK="# /IOTCONNECT brick shim"
@@ -129,7 +131,7 @@ if [[ $REMOVE -eq 1 ]]; then
       echo "Restored the classic relay client in python/ from $CLASSIC_CLIENT"
     else
       rm -f "${SHIM:?}"
-      echo "WARNING: $CLASSIC_CLIENT not found, so python/iotc_relay_client.py was deleted. Run scripts/unoq_setup.sh and copy it again." >&2
+      echo "WARNING: $CLASSIC_CLIENT not found, so python/iotc_relay_client.py was deleted. The classic relay client comes from scripts/unoq_setup.sh (UNO Q only); boards that use the brick alone do not need it." >&2
     fi
   fi
   for f in "$APP_DIR"/python/*.py; do

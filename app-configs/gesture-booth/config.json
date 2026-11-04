@@ -1,0 +1,30 @@
+{
+    "commands": [
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
+        }
+    ],
+    "example": "gesture-booth",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "gesture",
+            "type": "STRING"
+        },
+        {
+            "name": "gesture_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Hand gesture telemetry (VENTUNO Q): one message each time the recognised gesture changes, at most one per interval"
+}

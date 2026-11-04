@@ -1,0 +1,34 @@
+{
+    "commands": [
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
+        }
+    ],
+    "example": "pose-detection",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "pose",
+            "type": "STRING"
+        },
+        {
+            "name": "pose_event",
+            "type": "STRING"
+        },
+        {
+            "name": "people_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Pose detection telemetry (VENTUNO Q): one message per pose enter/exit event, at most one per interval (default 1 s), and one whenever the people count changes"
+}

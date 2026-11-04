@@ -2,7 +2,9 @@
 
 A [custom brick](https://docs.arduino.cc/software/app-lab/bricks/about-bricks/) that connects any App Lab app to
 Avnet's /IOTCONNECT platform. Drop the `bricks/iotconnect` folder into an app, list it in `app.yaml`, and the app can
-publish telemetry and react to cloud-to-device commands with a handful of lines of Python.
+publish telemetry and react to cloud-to-device commands with a handful of lines of Python. It runs on the Arduino UNO Q
+and the Arduino VENTUNO Q (verified with App Lab 0.14); on the VENTUNO Q it is the only way onto /IOTCONNECT, since that
+board has no relay service.
 
 ```python
 import time

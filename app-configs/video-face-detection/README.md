@@ -4,6 +4,11 @@ This is the /IOTCONNECT-enabled version of the Arduino example.
 
 Original Arduino README:
 - https://github.com/arduino/app-bricks-examples/blob/main/inspirational/platform_unoq/video-face-detection/README.md
+- VENTUNO Q variant (same Python, model `face-detection-qnn` in its `app.yaml`):
+  https://github.com/arduino/app-bricks-examples/blob/main/inspirational/platform_ventunoq/video-face-detection/README.md
+
+**Boards:** UNO Q and VENTUNO Q. On the VENTUNO Q use the "with the /IOTCONNECT brick" lines below (no relay service there,
+see the main README's section 7).
 
 ## Overview
 This version adds an /IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from /IOTCONNECT.

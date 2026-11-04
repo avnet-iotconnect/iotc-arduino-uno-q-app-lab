@@ -8,7 +8,16 @@ set -e
 # workaround for Git bash failing with subject formatting error for openssl
 export MSYS_NO_PATHCONV=1
 
-OUTDIR="/opt/demo"
+# Where the credentials go: /opt/demo (created by scripts/unoq_setup.sh on the UNO Q) or, when that folder
+# is missing or not writable (a VENTUNO Q that only uses the /IOTCONNECT brick, for example), $HOME/.iotconnect.
+# Override with IOTC_CREDS_DIR=<folder>. scripts/add_iotconnect_brick.sh looks in the same two places.
+OUTDIR="${IOTC_CREDS_DIR:-/opt/demo}"
+if [[ -z "${IOTC_CREDS_DIR:-}" && ! -w "${OUTDIR}" ]]; then
+    OUTDIR="${HOME}/.iotconnect"
+fi
+mkdir -p "${OUTDIR}"
+chmod 700 "${OUTDIR}" 2>/dev/null || true
+echo "Credentials folder: ${OUTDIR}"
 
 function askyn {
     if [ -z "$1" ]; then
@@ -86,7 +95,7 @@ fi
 
 cat <<END
 ---- /IOTCONNECT Python Lite Certificate Script ----
-This script will use and format ${cert_action} device credentials for your Arduino Uno Q
+This script will use and format ${cert_action} device credentials for your Arduino board
 to help onboard it into /IOTCONNECT.
 END
 

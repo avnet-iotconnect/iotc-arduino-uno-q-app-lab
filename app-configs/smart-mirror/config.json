@@ -1,0 +1,44 @@
+{
+    "commands": [
+        {
+            "name": "scan-look",
+            "parameters": []
+        }
+    ],
+    "example": "smart-mirror",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "source",
+            "type": "STRING"
+        },
+        {
+            "name": "message_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "model",
+            "type": "STRING"
+        },
+        {
+            "name": "response_preview",
+            "type": "STRING"
+        },
+        {
+            "name": "response_chars",
+            "type": "INTEGER"
+        },
+        {
+            "name": "processing_time_ms",
+            "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Smart mirror (VLM) telemetry: one message per completed scan, from the web UI or from the scan-look command"
+}

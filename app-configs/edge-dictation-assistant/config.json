@@ -1,0 +1,48 @@
+{
+    "commands": [
+        {
+            "name": "start-dictation",
+            "parameters": [
+                "seconds"
+            ]
+        },
+        {
+            "name": "stop-dictation",
+            "parameters": []
+        },
+        {
+            "name": "set-language",
+            "parameters": [
+                "language"
+            ]
+        }
+    ],
+    "example": "edge-dictation-assistant",
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        },
+        {
+            "name": "source",
+            "type": "STRING"
+        },
+        {
+            "name": "message_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "transcript",
+            "type": "STRING"
+        },
+        {
+            "name": "language",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        }
+    ],
+    "notes": "Edge dictation telemetry (VENTUNO Q, asr brick): one message per final transcription chunk, plus listening/stopped status messages when a dictation starts and ends"
+}
