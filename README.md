@@ -362,6 +362,7 @@ all in direct mode as device `ventunoQ0`: `blink` with its sketch through the br
 `video-face-detection` through the shim (live face detections, `set-confidence`, `run-detect`), and the five `[VQ]`
 examples natively: `gesture-booth` and `pose-detection` (runners healthy, `set-interval`), `edge-dictation-assistant`
 (`set-language`, `start-dictation` with `listening`/`stopped` telemetry), `smart-mirror` (scans from the page and from
-the `scan-look` command with the VLM's answer in the telemetry) and `edge-speech-assistant` without a USB speaker
-(stays connected, `speak` is acked as failed with the reason). The `tts`, `asr` and `vlm` models were installed first
+the `scan-look` command with the VLM's answer in the telemetry) and `edge-speech-assistant` both with a USB speaker
+(a cloud `speak` played and reported `started` then `finished`) and without one (stays connected, `speak` is acked
+as failed with the reason). The `tts`, `asr` and `vlm` models were installed first
 with `arduino-app-cli model install whisper-small-quantized`, `melo-tts-en` and `genie:qwen3_vl_4b_instruct`.
