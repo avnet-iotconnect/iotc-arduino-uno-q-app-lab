@@ -367,6 +367,8 @@ The Arduino VENTUNO Q runs the same App Lab, so sections 1 to 3 and 5 to 6 apply
   4. Select the model the brick should use; it is marked **Model in use**. Each brick has a default for the board
      (the one in the table), which the example runs unless you select another.
 
+  <img src="images/app-lab-ai-models.png" alt="The AI Models tab of the LLM brick: Qwen 3-4B Instruct installed and in use, the other models offering Download" width="900">
+
   | Example | Brick | Model (CLI id) | Download |
   | --- | --- | --- | --- |
   | edge-ai-assistant | Large Language Model (LLM) | Qwen 3-4B Instruct (`genie:qwen3_4b_instruct_2507`) | 3.0 GB |

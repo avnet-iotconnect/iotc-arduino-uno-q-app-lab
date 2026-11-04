@@ -83,6 +83,9 @@ Each prompt produces two messages: `status` = `requested` when it is sent to the
    **Suggested models** shows **Download** or **Installed**. From the board's terminal instead:
    `arduino-app-cli model install llamacpp:Qwen3.5-0.8B-Q4_0` (UNO Q) or
    `arduino-app-cli model install genie:qwen3_4b_instruct_2507` (VENTUNO Q).
+
+   <img src="../../images/app-lab-ai-models.png" alt="The AI Models tab of the LLM brick on a VENTUNO Q: Qwen 3-4B Instruct installed and in use" width="800">
+
 4) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes
