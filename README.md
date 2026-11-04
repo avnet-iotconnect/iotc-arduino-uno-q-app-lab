@@ -265,7 +265,7 @@ Use these /IOTCONNECT-specific guides:
 - [cloud-blink](app-configs/cloud-blink/README.md)
 - [code-detector](app-configs/code-detector/README.md) `[AH]`
 - [color-your-leds](app-configs/color-your-leds/README.md) `[UQ]`
-- [edge-ai-assistant](app-configs/edge-ai-assistant/README.md)
+- [edge-ai-assistant](app-configs/edge-ai-assistant/README.md) `[DB]`
 - [edge-dictation-assistant](app-configs/edge-dictation-assistant/README.md) `[VQ]` `[AH]`
 - [edge-speech-assistant](app-configs/edge-speech-assistant/README.md) `[VQ]` `[AH]`
 - [gesture-booth](app-configs/gesture-booth/README.md) `[VQ]` `[AH]`

@@ -25,6 +25,8 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 ## Files
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `config.json` (telemetry/command definitions)
+- `edge-ai-assistant-dashboard-template.json` (exported /IOTCONNECT dashboard, see below)
+- `dashboard-images/` (the title panel and the three assistant-state images the dashboard shows)
 
 The upstream `python/prompts.py` and `python/system_prompt.txt` are used unchanged from your App Lab copy of the example.
 
@@ -36,6 +38,23 @@ Quickstart: use the shared master template at `app-configs/arduino-app-lab-templ
 Optional: `device-template.json` in this folder is a per-example template containing only this app's fields. Import it and bind a separate device to it if you prefer one template per example.
 - Template code: `UnoQEAA`
 - Template name: `UnoQEdgeAiAssistant`
+
+## /IOTCONNECT Dynamic Dashboard
+
+Dashboard template file: [edge-ai-assistant-dashboard-template.json](edge-ai-assistant-dashboard-template.json)
+
+What it shows: the assistant's state as an image (thinking, answered, ready, driven by `status`), the latest
+prompt and response previews, a gauge and a bar chart of `processing_time_ms`, the latest values of the chat
+telemetry, an **Ask** button with a canned question, a **Clear** button and the command panel for your own
+`ask <question>`. The widgets use the images in [dashboard-images/](dashboard-images/), served from
+`https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/arduino/`.
+
+Import into /IOTCONNECT:
+1. Open /IOTCONNECT and go to **Dashboard**.
+2. Click **Import Dashboard** and upload the JSON file linked above.
+3. Save the imported dashboard and map it to your device on the `arduino` master template (the file is bound to
+   a VENTUNO Q device named `ventunoQ0`; a UNO Q device on the same template works the same way).
+4. Open the dashboard in live mode, run the app and ask it something: the images and values populate from telemetry.
 
 ## Telemetry Fields
 | Field | Type |
