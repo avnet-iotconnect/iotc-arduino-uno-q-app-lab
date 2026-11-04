@@ -356,8 +356,11 @@ The Arduino VENTUNO Q runs the same App Lab, so sections 1 to 3 and 5 to 6 apply
   the board (next point), and its VENTUNO Q copy has a longer system prompt, used unchanged from your App Lab copy.
 - **AI models.** The AI bricks run a model stored on the board and shared by every app. `gesture-booth`,
   `pose-detection` and `video-face-detection` use models that come with App Lab. The other `[VQ]` examples and
-  `edge-ai-assistant` need a download, once per board, which is done in App Lab (built-in examples cannot change
-  models, so make your **Copy and edit app** copy first):
+  `edge-ai-assistant` need a download, once per board. The first time you run one of them on a board that does
+  not have its model, App Lab sees that the model is missing and asks you to download it: accept, wait for the
+  download (sizes below) and the app starts. Once the model is on the board the question is not asked again,
+  and the brick's **AI Models** tab is where you see the models on the board, download one ahead of time or
+  pick another (built-in examples cannot change models, so make your **Copy and edit app** copy first):
   1. Open your copy of the example and select the AI brick in the **Bricks** section of the editor sidebar.
   2. Open the **AI Models** tab. **Suggested models** lists the models that fit the brick and the board.
   3. Click **Download** on the model card. The card shows **Installed** when the download has finished.
@@ -371,12 +374,10 @@ The Arduino VENTUNO Q runs the same App Lab, so sections 1 to 3 and 5 to 6 apply
   | edge-dictation-assistant | Automatic Speech Recognition (ASR) | Whisper Small (quantized) (`whisper-small-quantized`) | 343 MB |
   | edge-speech-assistant | Text-to-Speech (TTS) | Piper TTS (English) (`pipertts_en`) | 79 MB |
 
-  Running an app whose model is missing downloads it first and starts the app when the download has finished, so
-  download the gigabyte-sized models from the tab first rather than spending the first run waiting on them.
-  The board's terminal does the same with `arduino-app-cli model list` and
-  `arduino-app-cli model install <CLI id>`. Check **Disk storage** in App Lab's Settings before the large ones:
-  the two Qwen models together take 7.1 GB. Reference:
-  [AI Models in Arduino App Lab](https://docs.arduino.cc/software/app-lab/integrations/models/).
+  From the board's terminal, `arduino-app-cli app start` downloads a missing model without asking, and
+  `arduino-app-cli model list` / `arduino-app-cli model install <CLI id>` manage the models directly. Check
+  **Disk storage** in App Lab's Settings before the large ones: the two Qwen models together take 7.1 GB.
+  Reference: [AI Models in Arduino App Lab](https://docs.arduino.cc/software/app-lab/integrations/models/).
 - **Board update.** The App Lab update in section 1 installs the VENTUNO Q board support. Sketch-based apps need the
   `arduino:zephyr` core 1.1.0 or newer (it lists the `ventunoq` board); the `[VQ]` examples have no sketch.
 - **App Lab CLI.** The CLI names apps by ID: `arduino-app-cli app start user:<APP_LAB_FOLDER>`,

@@ -72,11 +72,12 @@ Each completed scan produces one message. `source` is `web_ui` (the **Scan your 
    bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --direct
    ```
    The device credentials come from `scripts/credentials.sh` (README section 3). On the VENTUNO Q they live in `$HOME/.iotconnect`, where the script finds them and copies them into the app's `data/iotconnect` folder.
-4) Download the model, once per board, unless the **AI Models** tab of the **Vision Language Model (VLM)** brick
-   already shows it as **Installed**: in App Lab open your copy of the app, select the brick in the **Bricks**
-   section of the editor sidebar, open **AI Models** and click **Download** on **Qwen 3-VL-4B VLM** (4.1 GB).
-   From the board's terminal instead: `arduino-app-cli model install genie:qwen3_vl_4b_instruct`. Running the
-   app without the model downloads it first, which takes a while.
+4) Get the model onto the board, once: the `vlm` brick runs **Qwen 3-VL-4B VLM** (4.1 GB). The first time you run
+   the app on a board without it, App Lab sees that the model is missing and asks you to download it; accept
+   and wait. To download ahead of time, or to check, open your copy of the app, select the **Vision Language
+   Model (VLM)** brick in the **Bricks** section of the editor sidebar and open **AI Models**: the model's card
+   shows **Download** or **Installed**. From the board's terminal instead:
+   `arduino-app-cli model install genie:qwen3_vl_4b_instruct`.
 5) Run the app, open `<board-name>.local:7000`, tap **Scan your look** and verify the telemetry in /IOTCONNECT.
 
 ## Notes

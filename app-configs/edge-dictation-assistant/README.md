@@ -71,11 +71,12 @@ Every final transcription chunk (the `full_text` events the web UI appends to th
    bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --direct
    ```
    The device credentials come from `scripts/credentials.sh` (section 3 of the main README); on the VENTUNO Q they live in `$HOME/.iotconnect`. If the script reports missing credential files, tell it where they are: `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --direct --creds-from $HOME/.iotconnect`.
-4) Download the model, once per board, unless the **AI Models** tab of the **Automatic Speech Recognition (ASR)**
-   brick already shows it as **Installed**: in App Lab open your copy of the app, select the brick in the
-   **Bricks** section of the editor sidebar, open **AI Models** and click **Download** on **Whisper Small
-   (quantized)** (343 MB). From the board's terminal instead: `arduino-app-cli model install whisper-small-quantized`.
-   Running the app without the model downloads it first.
+4) Get the model onto the board, once: the `asr` brick runs **Whisper Small (quantized)** (343 MB). The first time
+   you run the app on a board without it, App Lab sees that the model is missing and asks you to download it;
+   accept and wait. To download ahead of time, or to check, open your copy of the app, select the **Automatic
+   Speech Recognition (ASR)** brick in the **Bricks** section of the editor sidebar and open **AI Models**: the
+   model's card shows **Download** or **Installed**. From the board's terminal instead:
+   `arduino-app-cli model install whisper-small-quantized`.
 5) Run the app, open its web UI (`<VENTUNO-IP-ADDRESS>:7000`), start a dictation with the microphone button (or send `start-dictation` from /IOTCONNECT) and verify the telemetry in /IOTCONNECT.
 
 ## Notes

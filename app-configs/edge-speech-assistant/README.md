@@ -71,9 +71,10 @@ Each speech request produces two messages: `status` = `started` when the text is
    bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --direct
    ```
    The device credentials come from `scripts/credentials.sh` (README section 3); on the VENTUNO Q they live in `$HOME/.iotconnect`, and the script copies them into the app's `data/iotconnect/`. The script finds them there on its own; pass `--creds-from <dir>` only if you keep the credentials somewhere else.
-4) The **Text-to-Speech (TTS)** brick runs **Piper TTS (English)** (79 MB, CLI id `pipertts_en`). The first run
-   downloads it when it is missing (see Notes); to do it ahead, in App Lab open your copy of the app, select the
-   brick in the **Bricks** section of the editor sidebar, open **AI Models** and click **Download** on its card.
+4) The **Text-to-Speech (TTS)** brick runs **Piper TTS (English)** (79 MB, CLI id `pipertts_en`). The first time
+   you run the app on a board without it, App Lab sees that the model is missing and asks you to download it
+   (see Notes); to do it ahead, open your copy of the app, select the brick in the **Bricks** section of the
+   editor sidebar, open **AI Models** and click **Download** on its card.
 5) Run the app and verify telemetry in /IOTCONNECT: type a text in the web UI (`http://<VENTUNO-Q-IP>:7000`) and press Play, or send `speak <text>` from the device's command page.
 
 ## Notes

@@ -75,14 +75,14 @@ Each prompt produces two messages: `status` = `requested` when it is sent to the
    bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
    ```
    Either way, `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --remove` goes back to the classic relay client.
-3) Download the model, once per board, unless the **AI Models** tab of the **Large Language Model (LLM)** brick
-   already shows it as **Installed**: in App Lab open your copy of the app, select the brick in the **Bricks**
-   section of the editor sidebar, open **AI Models** and click **Download** on the brick's default model for the
-   board, listed under **Suggested models**: **Qwen 3.5 0.8B** (507 MB) on the UNO Q, **Qwen 3-4B Instruct**
-   (3.0 GB) on the VENTUNO Q. From the board's terminal
-   instead: `arduino-app-cli model install llamacpp:Qwen3.5-0.8B-Q4_0` (UNO Q) or
-   `arduino-app-cli model install genie:qwen3_4b_instruct_2507` (VENTUNO Q). Running the app without the model
-   downloads it first, which takes a while for the 3 GB one.
+3) Get the model onto the board, once: the `llm` brick's default is **Qwen 3.5 0.8B** (507 MB) on the UNO Q and
+   **Qwen 3-4B Instruct** (3.0 GB) on the VENTUNO Q. The first time you run the app on a board without it, App
+   Lab sees that the model is missing and asks you to download it; accept and wait (the 3 GB one takes a while).
+   To download ahead of time, or to check, open your copy of the app, select the **Large Language Model (LLM)**
+   brick in the **Bricks** section of the editor sidebar and open **AI Models**: the model's card under
+   **Suggested models** shows **Download** or **Installed**. From the board's terminal instead:
+   `arduino-app-cli model install llamacpp:Qwen3.5-0.8B-Q4_0` (UNO Q) or
+   `arduino-app-cli model install genie:qwen3_4b_instruct_2507` (VENTUNO Q).
 4) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes
