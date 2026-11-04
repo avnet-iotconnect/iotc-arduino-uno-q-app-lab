@@ -73,6 +73,7 @@ Two kinds of message are sent:
 
 ## Notes
 - Arduino VENTUNO Q only: the `pose_estimation` brick runs on the board's NPU and is not available on the UNO Q.
+  Its model (PoseNet MobileNet Pose Estimation) comes with App Lab: nothing to download.
 - Connect the camera before starting the app. Telemetry is sent only on pose events and people-count changes, so you will not see data until someone is in the picture.
 - Direct mode puts the device's private key inside the app folder (`data/iotconnect`). Delete that folder before exporting or sharing the app.
 - The board needs internet access the first time the app starts, so App Lab can install the brick's `requirements.txt` (the /IOTCONNECT Python Lite SDK).

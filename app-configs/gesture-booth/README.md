@@ -67,6 +67,7 @@ One message is sent each time the recognised gesture changes, at most one per in
 4) Run the app, show a gesture to the camera and verify telemetry in /IOTCONNECT.
 
 ## Notes
+- The gesture model (MediaPipe Hand-Gesture Recognition) comes with App Lab: nothing to download.
 - The brick connects once `App.run()` has started, and the first start needs internet access to install the /IOTCONNECT Python SDK. A gesture shown while the connection is down is not sent (`send result: False` in the console) and is retried every interval until the connection is up, so the current gesture arrives as soon as the brick is connected; `gesture_count` only counts messages that were actually sent.
 - The gesture callbacks fire for every frame, so a change that falls inside the interval is reported as soon as the interval has passed; a held gesture is never lost.
 - With two hands showing different gestures, the report alternates between them, one message per interval.

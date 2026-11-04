@@ -4,7 +4,8 @@ This is the /IOTCONNECT-enabled version of the Arduino example.
 
 Original Arduino README:
 - https://github.com/arduino/app-bricks-examples/blob/main/inspirational/platform_unoq/edge-ai-assistant/README.md
-- VENTUNO Q variant (same Python, model `genie:qwen3_4b_instruct_2507` in its `app.yaml`):
+- VENTUNO Q variant (same `app.yaml`; the `llm` brick runs Qwen 3-4B Instruct on that board's NPU, and the copy has
+  a longer system prompt):
   https://github.com/arduino/app-bricks-examples/blob/main/inspirational/platform_ventunoq/edge-ai-assistant/README.md
 
 **Boards:** UNO Q and VENTUNO Q. On the VENTUNO Q use the "with the /IOTCONNECT brick" lines below (no relay service there,
@@ -74,9 +75,19 @@ Each prompt produces two messages: `status` = `requested` when it is sent to the
    bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER>
    ```
    Either way, `bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_iotconnect_brick.sh <APP_LAB_FOLDER> --remove` goes back to the classic relay client.
-3) Run the app and verify telemetry in /IOTCONNECT.
+3) Download the model, once per board, unless the **AI Models** tab of the **Large Language Model (LLM)** brick
+   already shows it as **Installed**: in App Lab open your copy of the app, select the brick in the **Bricks**
+   section of the editor sidebar, open **AI Models** and click **Download** on the brick's default model for the
+   board, listed under **Suggested models**: **Qwen 3.5 0.8B** (507 MB) on the UNO Q, **Qwen 3-4B Instruct**
+   (3.0 GB) on the VENTUNO Q. From the board's terminal
+   instead: `arduino-app-cli model install llamacpp:Qwen3.5-0.8B-Q4_0` (UNO Q) or
+   `arduino-app-cli model install genie:qwen3_4b_instruct_2507` (VENTUNO Q). Running the app without the model
+   downloads it first, which takes a while for the 3 GB one.
+4) Run the app and verify telemetry in /IOTCONNECT.
 
 ## Notes
-- The model runs entirely on the UNO Q; the first response after startup can take a while as the model loads.
+- The model runs entirely on the board; the first response after startup can take a while as the model loads. The
+  upstream VENTUNO Q copy keeps 20 chat messages in memory instead of 10; this version keeps the UNO Q value
+  (`llm.with_memory(10)`), change it if you want the longer memory.
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.

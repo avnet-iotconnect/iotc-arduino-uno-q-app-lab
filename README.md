@@ -350,8 +350,33 @@ The Arduino VENTUNO Q runs the same App Lab, so sections 1 to 3 and 5 to 6 apply
   VENTUNO Q and ship a `python/main.py` written directly against the brick API, with their own telemetry and commands.
   Those fields are part of the master template; re-import `app-configs/arduino-app-lab-template.json` (or add the
   attributes to your existing template) if you imported it before they were added. The `edge-ai-assistant` and
-  `video-face-detection` examples exist for both boards with the same Python code; only the model named in the
-  example's `app.yaml` differs.
+  `video-face-detection` examples exist for both boards and run the same /IOTCONNECT `python/main.py`:
+  `video-face-detection` names the board's face model in its `app.yaml` (`face-detection` on the UNO Q,
+  `face-detection-qnn` on the VENTUNO Q), `edge-ai-assistant` leaves the model to the `llm` brick's default for
+  the board (next point), and its VENTUNO Q copy has a longer system prompt, used unchanged from your App Lab copy.
+- **AI models.** The AI bricks run a model stored on the board and shared by every app. `gesture-booth`,
+  `pose-detection` and `video-face-detection` use models that come with App Lab. The other `[VQ]` examples and
+  `edge-ai-assistant` need a download, once per board, which is done in App Lab (built-in examples cannot change
+  models, so make your **Copy and edit app** copy first):
+  1. Open your copy of the example and select the AI brick in the **Bricks** section of the editor sidebar.
+  2. Open the **AI Models** tab. **Suggested models** lists the models that fit the brick and the board.
+  3. Click **Download** on the model card. The card shows **Installed** when the download has finished.
+  4. Select the model the brick should use; it is marked **Model in use**. Each brick has a default for the board
+     (the one in the table), which the example runs unless you select another.
+
+  | Example | Brick | Model (CLI id) | Download |
+  | --- | --- | --- | --- |
+  | edge-ai-assistant | Large Language Model (LLM) | Qwen 3-4B Instruct (`genie:qwen3_4b_instruct_2507`) | 3.0 GB |
+  | smart-mirror | Vision Language Model (VLM) | Qwen 3-VL-4B VLM (`genie:qwen3_vl_4b_instruct`) | 4.1 GB |
+  | edge-dictation-assistant | Automatic Speech Recognition (ASR) | Whisper Small (quantized) (`whisper-small-quantized`) | 343 MB |
+  | edge-speech-assistant | Text-to-Speech (TTS) | Piper TTS (English) (`pipertts_en`) | 79 MB |
+
+  Running an app whose model is missing downloads it first and starts the app when the download has finished, so
+  download the gigabyte-sized models from the tab first rather than spending the first run waiting on them.
+  The board's terminal does the same with `arduino-app-cli model list` and
+  `arduino-app-cli model install <CLI id>`. Check **Disk storage** in App Lab's Settings before the large ones:
+  the two Qwen models together take 7.1 GB. Reference:
+  [AI Models in Arduino App Lab](https://docs.arduino.cc/software/app-lab/integrations/models/).
 - **Board update.** The App Lab update in section 1 installs the VENTUNO Q board support. Sketch-based apps need the
   `arduino:zephyr` core 1.1.0 or newer (it lists the `ventunoq` board); the `[VQ]` examples have no sketch.
 - **App Lab CLI.** The CLI names apps by ID: `arduino-app-cli app start user:<APP_LAB_FOLDER>`,
@@ -364,5 +389,7 @@ examples natively: `gesture-booth` and `pose-detection` (runners healthy, `set-i
 (`set-language`, `start-dictation` with `listening`/`stopped` telemetry), `smart-mirror` (scans from the page and from
 the `scan-look` command with the VLM's answer in the telemetry) and `edge-speech-assistant` both with a USB speaker
 (a cloud `speak` played and reported `started` then `finished`) and without one (stays connected, `speak` is acked
-as failed with the reason). The `tts`, `asr` and `vlm` models were installed first
-with `arduino-app-cli model install whisper-small-quantized`, `melo-tts-en` and `genie:qwen3_vl_4b_instruct`.
+as failed with the reason); and `edge-ai-assistant` through the shim (`ask` answered by Qwen 3-4B Instruct on the
+NPU with `requested` then `complete` telemetry, `clear-chat`). Qwen 3-4B Instruct was downloaded from App Lab's
+**AI Models** tab, Whisper and Qwen 3-VL with `arduino-app-cli model install`, and Piper TTS by the first start of
+`edge-speech-assistant`.
