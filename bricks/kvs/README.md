@@ -58,6 +58,8 @@ classifier on camera and Object Hunting examples.
 | `KVS_STREAM_NAME` | `auto` | the device's client id; anything else names another Kinesis stream |
 | `KVS_REGION` | `us-east-1` | region of the stream |
 | `KVS_RETENTION_HOURS` | `2` | how long Kinesis keeps the video |
+| `KVS_KEYFRAME_SEC` | `1` | key-frame interval = fragment length (1 for lowest latency, 2 for robustness) |
+| `KVS_OVERLAY` | `true` | draw the runner's detections on the uploaded frames |
 | `KVS_CREDENTIALS_DIR` | `/app/data/kvs` | device identity files (falls back to `/app/data/iotconnect`) |
 | `KVS_LIBS_DIR` | `/app/data/kvs/libs` | `kvssink` and its libraries |
 
@@ -71,6 +73,22 @@ kvs.push_frame(jpeg)      # KVS_SOURCE=push: hand a JPEG-encoded frame over
 kvs.on_state(fn)          # fn(True/False) when the upload starts or stops
 kvs.status()              # dict for logs or telemetry
 ```
+
+## Overlays
+
+With `KVS_OVERLAY=true` (default) the brick draws the video runner's results on the uploaded frames: a box with
+label and confidence per detected object (object detection, face detection, object hunting) or the top label for
+image classification. The runner reports boxes in preview-frame pixels, so they line up with the picture. Apps that
+feed frames with `push_frame()` can pass their own results with `kvs.set_overlay([...])` (items with `label`,
+optional `confidence` and optional `box=(x1, y1, x2, y2)`); results older than 1.5 s are not drawn.
+
+## Latency
+
+HLS playback is a few fragment lengths behind the camera: with the default 1-second fragments expect about 3 to 4
+seconds in the App Lab Cloud Console (its player keeps 2 s of buffer and catches up at 1.3x when it falls behind) and
+a bit more in the /IOTCONNECT portal, whose player buffers on its own. `KVS_KEYFRAME_SEC=2` trades latency for
+robustness on a weak network. Sub-second latency would need the WebRTC flavour of /IOTCONNECT video streaming, which
+is a different device pipeline.
 
 ## Watching the stream
 

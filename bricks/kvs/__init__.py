@@ -40,8 +40,10 @@ import subprocess
 import sys
 import threading
 import time
-from collections.abc import Callable
+import zlib
+from collections.abc import Callable, Iterable, Mapping
 from datetime import datetime, timezone
+from io import BytesIO
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -60,6 +62,8 @@ _TICK_S = 0.5
 _RETRY_S = 5.0
 _QUEUE_FRAMES = 4
 _TOKEN_REFRESH_MARGIN_S = 300
+_OVERLAY_TTL_S = 1.5  # detections older than this are not drawn any more
+_OVERLAY_COLORS = ((230, 57, 70), (29, 158, 117), (33, 118, 214), (236, 142, 20), (142, 68, 173), (0, 150, 160), (200, 80, 150), (120, 120, 40))
 
 
 def _env(name: str, default: str = "") -> str:
@@ -141,9 +145,14 @@ class KvsStream:
         except ValueError:
             self._retention_hours = 2
         try:
-            self._keyframe_sec = min(10.0, max(0.5, float(_env("KVS_KEYFRAME_SEC", "2"))))
+            self._keyframe_sec = min(10.0, max(0.5, float(_env("KVS_KEYFRAME_SEC", "1"))))
         except ValueError:
-            self._keyframe_sec = 2.0
+            self._keyframe_sec = 1.0
+        self._overlay_enabled = _env_bool("KVS_OVERLAY", True)
+        self._overlay: dict[str, Any] = {"boxes": [], "labels": [], "ts": 0.0}
+        self._overlay_lock = threading.Lock()
+        self._font: Any = None
+        self._font_size = 0
         self._auth = _env("KVS_AUTH", "iot").strip().lower()
         if self._auth not in ("iot", "token"):
             self._auth = "iot"
@@ -197,6 +206,28 @@ class KvsStream:
         """Calls ``fn(streaming)`` when the stream starts delivering frames or stops."""
         self._state_callbacks.append(fn)
 
+    def set_overlay(self, detections: Iterable[Mapping[str, Any]] | None) -> None:
+        """Boxes and labels to draw on the uploaded frames for the next 1.5 seconds (call it again with each
+        result). Each item is a mapping with ``label``, optional ``confidence`` (0..1) and optional ``box`` =
+        ``(x1, y1, x2, y2)`` in frame pixels or 0..1 fractions; items without a box are listed as text in the corner.
+        With ``KVS_SOURCE=auto`` the brick already draws the video runner's detections; this replaces them."""
+        boxes: list[dict[str, Any]] = []
+        labels: list[dict[str, Any]] = []
+        for item in detections or ():
+            label = str(item.get("label") or "").strip()
+            if not label:
+                continue
+            conf = item.get("confidence")
+            entry = {"label": label, "confidence": None if conf is None else float(conf)}
+            box = item.get("box")
+            if box is not None and len(box) == 4:
+                entry["box"] = tuple(float(v) for v in box)
+                boxes.append(entry)
+            else:
+                labels.append(entry)
+        with self._overlay_lock:
+            self._overlay = {"boxes": boxes, "labels": labels, "ts": time.time()}
+
     def status(self) -> dict[str, Any]:
         """A summary for logs or telemetry."""
         return {
@@ -206,6 +237,7 @@ class KvsStream:
             "source": self._source,
             "runner": self._runner_host,
             "frames_sent": self._frames_sent,
+            "overlay": self._overlay_enabled,
             "last_error": self._last_error,
         }
 
@@ -465,6 +497,8 @@ class KvsStream:
                 jpeg = self._frames.get(timeout=_TICK_S)
             except queue.Empty:
                 continue
+            if self._overlay_enabled:
+                jpeg = self._draw_overlay(jpeg)
             part = b"--kvsframe\r\nContent-Type: image/jpeg\r\nContent-Length: %d\r\n\r\n" % len(jpeg) + jpeg + b"\r\n"
             try:
                 proc.stdin.write(part)
@@ -502,7 +536,12 @@ class KvsStream:
                             msg = json.loads(message)
                         except (TypeError, ValueError):
                             continue
-                        if msg.get("type") != "camera-preview":
+                        kind = msg.get("type")
+                        if kind == "classification":
+                            if self._overlay_enabled:
+                                self._ingest_runner_result(msg.get("result"))
+                            continue
+                        if kind != "camera-preview":
                             continue
                         image = msg.get("image") or ""
                         if "," in image:
@@ -515,3 +554,91 @@ class KvsStream:
                 if self._session_alive.is_set():
                     logger.warning(f"Video runner connection lost ({exc}); retrying")
                     time.sleep(2.0)
+
+    # --- overlay: the runner's detections drawn on the frames ---
+
+    def _ingest_runner_result(self, result: Any) -> None:  # noqa: ANN401
+        """Edge Impulse runner result: ``bounding_boxes`` (x, y, width, height in frame pixels, label, value) for
+        object detection, ``classification`` (label -> probability) for image classification."""
+        if not isinstance(result, dict):
+            return
+        items: list[dict[str, Any]] = []
+        for box in result.get("bounding_boxes") or []:
+            if not isinstance(box, dict) or not box.get("label"):
+                continue
+            try:
+                x, y, w, h = float(box.get("x", 0)), float(box.get("y", 0)), float(box.get("width", 0)), float(box.get("height", 0))
+            except (TypeError, ValueError):
+                continue
+            items.append({"label": box["label"], "confidence": box.get("value"), "box": (x, y, x + w, y + h)})
+        classes = result.get("classification")
+        if isinstance(classes, dict) and classes:
+            label, value = max(classes.items(), key=lambda kv: float(kv[1] or 0))
+            if float(value or 0) >= 0.5:
+                items.append({"label": label, "confidence": value})
+        self.set_overlay(items)
+
+    def _get_font(self, size: int) -> Any:  # noqa: ANN401
+        if self._font is None or self._font_size != size:
+            from PIL import ImageFont
+
+            try:
+                self._font = ImageFont.load_default(size=size)
+            except TypeError:  # Pillow < 10.1
+                self._font = ImageFont.load_default()
+            self._font_size = size
+        return self._font
+
+    @staticmethod
+    def _label_color(label: str) -> tuple[int, int, int]:
+        return _OVERLAY_COLORS[zlib.crc32(label.encode("utf-8")) % len(_OVERLAY_COLORS)]
+
+    def _draw_overlay(self, jpeg: bytes) -> bytes:
+        with self._overlay_lock:
+            overlay = dict(self._overlay)
+        if time.time() - overlay["ts"] > _OVERLAY_TTL_S or not (overlay["boxes"] or overlay["labels"]):
+            return jpeg
+        try:
+            from PIL import Image, ImageDraw
+        except ImportError:
+            logger.warning("Pillow is not available; KVS_OVERLAY disabled")
+            self._overlay_enabled = False
+            return jpeg
+        try:
+            img = Image.open(BytesIO(jpeg))
+            img.load()
+            if img.mode != "RGB":
+                img = img.convert("RGB")
+            width, height = img.size
+            draw = ImageDraw.Draw(img)
+            font = self._get_font(max(14, height // 28))
+            pad = 4
+
+            def tag(x: float, y: float, text: str, color: tuple[int, int, int]) -> float:
+                left, top, right, bottom = draw.textbbox((0, 0), text, font=font)
+                tw, th = right - left, bottom - top
+                draw.rectangle([x, y, x + tw + 2 * pad, y + th + 2 * pad], fill=color)
+                draw.text((x + pad - left, y + pad - top), text, fill=(255, 255, 255), font=font)
+                return th + 2 * pad
+
+            for item in overlay["boxes"]:
+                x1, y1, x2, y2 = item["box"]
+                if max(x1, y1, x2, y2) <= 1.0:  # fractions of the frame
+                    x1, x2, y1, y2 = x1 * width, x2 * width, y1 * height, y2 * height
+                x1, x2 = sorted((min(max(x1, 0), width - 1), min(max(x2, 0), width - 1)))
+                y1, y2 = sorted((min(max(y1, 0), height - 1), min(max(y2, 0), height - 1)))
+                color = self._label_color(item["label"])
+                draw.rectangle([x1, y1, x2, y2], outline=color, width=3)
+                text = item["label"] if item.get("confidence") is None else f"{item['label']} {float(item['confidence']):.2f}"
+                th = draw.textbbox((0, 0), text, font=font)[3] + 2 * pad
+                tag(x1, y1 - th if y1 - th >= 0 else y1, text, color)
+            y = 8.0
+            for item in overlay["labels"]:
+                text = item["label"] if item.get("confidence") is None else f"{item['label']} {float(item['confidence']):.2f}"
+                y += tag(8, y, text, self._label_color(item["label"])) + 6
+            out = BytesIO()
+            img.save(out, format="JPEG", quality=80)
+            return out.getvalue()
+        except Exception as exc:  # noqa: BLE001 - never let the overlay break the stream
+            logger.debug(f"overlay skipped: {exc}")
+            return jpeg
