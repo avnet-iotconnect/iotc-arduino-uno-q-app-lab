@@ -37,6 +37,7 @@ import queue
 import shutil
 import socket
 import subprocess
+import sys
 import threading
 import time
 from collections.abc import Callable
@@ -139,6 +140,10 @@ class KvsStream:
             self._retention_hours = max(0, int(_env("KVS_RETENTION_HOURS", "2")))
         except ValueError:
             self._retention_hours = 2
+        try:
+            self._keyframe_sec = min(10.0, max(0.5, float(_env("KVS_KEYFRAME_SEC", "2"))))
+        except ValueError:
+            self._keyframe_sec = 2.0
         self._auth = _env("KVS_AUTH", "iot").strip().lower()
         if self._auth not in ("iot", "token"):
             self._auth = "iot"
@@ -321,26 +326,30 @@ class KvsStream:
         return env
 
     def _build_command(self, encoder: str) -> list[str]:
+        """The upload pipeline, run by gst_runner.py (a key frame is forced every KVS_KEYFRAME_SEC seconds, which
+        is where kvssink cuts the fragments)."""
         fps = int(round(self._fps))
-        keyframe_period = max(1, fps)  # one key frame per second: kvssink cuts fragments at key frames
+        keyframe_period = max(1, int(round(fps * self._keyframe_sec)))
         if encoder == "v4l2h264enc":
             # Ask for constrained-baseline level 4 explicitly: left alone, the Venus encoder stamps Level 1.0 into
             # the SPS (invalid for 640x480), and browser hardware decoders then show a black picture. The V4L2
-            # controls are the ones the Venus driver exposes (video_gop_size sets the key-frame interval; CBR keeps
-            # the upload near the requested bitrate instead of the driver's 1 Mbit/s VBR default).
+            # controls are the ones the Venus driver exposes (video_gop_size; CBR keeps the upload near the
+            # requested bitrate instead of the driver's 1 Mbit/s VBR default). The periodic IDR comes from the
+            # force-key-unit event gst_runner.py sends: the driver's own GOP boundaries are not IDR frames.
             enc = ["videoconvert", "!", "video/x-raw,format=NV12", "!", "videorate", "!", f"video/x-raw,framerate={fps}/1", "!",
-                   "v4l2h264enc", ("extra-controls=controls,video_bitrate_mode=1,"
-                                   f"video_bitrate={self._bitrate},video_peak_bitrate={self._bitrate * 4 // 3},"
-                                   f"video_gop_size={keyframe_period},h264_i_frame_period={keyframe_period}"),
+                   "v4l2h264enc", "name=enc", ("extra-controls=controls,video_bitrate_mode=1,"
+                                               f"video_bitrate={self._bitrate},video_peak_bitrate={self._bitrate * 4 // 3},"
+                                               f"video_gop_size={keyframe_period}"),
                    "!", "video/x-h264,profile=constrained-baseline,level=(string)4"]
         elif encoder == "x264enc":
             enc = ["videoconvert", "!", "videorate", "!", f"video/x-raw,framerate={fps}/1", "!",
-                   "x264enc", "tune=zerolatency", "speed-preset=ultrafast", f"bitrate={max(100, self._bitrate // 1000)}", f"key-int-max={keyframe_period}"]
+                   "x264enc", "name=enc", "tune=zerolatency", "speed-preset=ultrafast", f"bitrate={max(100, self._bitrate // 1000)}", f"key-int-max={keyframe_period}"]
         else:
             enc = ["videoconvert", "!", "videorate", "!", f"video/x-raw,framerate={fps}/1", "!",
-                   "openh264enc", f"bitrate={self._bitrate}", f"gop-size={keyframe_period}"]
+                   "openh264enc", "name=enc", f"bitrate={self._bitrate}", f"gop-size={keyframe_period}"]
         sink = ["kvssink", f"stream-name={self.stream_name}", f"aws-region={self._region}", "storage-size=128",
-                f"retention-period={self._retention_hours}", f"framerate={fps}", "allow-create-stream=true"]
+                f"retention-period={self._retention_hours}", f"framerate={fps}", "allow-create-stream=true",
+                f"fragment-duration={int(self._keyframe_sec * 1000)}"]
         if self._log_config.is_file():
             sink.append(f"log-config={self._log_config}")
         if self._auth == "iot":
@@ -360,8 +369,11 @@ class KvsStream:
         else:
             tok = self._fetch_token()
             sink += [f"access-key={tok['ak']}", f"secret-key={tok['sk']}", f"session-token={tok['st']}"]
-        return (["gst-launch-1.0", "-e", "-q", "fdsrc", "fd=0", "do-timestamp=true", "!", "multipartdemux", "!", "image/jpeg", "!", "jpegdec", "!"]
-                + enc + ["!", "h264parse", "config-interval=-1", "!", "video/x-h264,stream-format=avc,alignment=au", "!"] + sink)
+        # No in-band SPS/PPS repetition (h264parse config-interval stays 0): the parameter sets travel once in the
+        # avcC codec data; repeating them at every IDR made Kinesis flag a discontinuity on every fragment.
+        description = " ".join(["fdsrc", "fd=0", "do-timestamp=true", "!", "multipartdemux", "!", "image/jpeg", "!", "jpegdec", "!"]
+                               + enc + ["!", "h264parse", "!", "video/x-h264,stream-format=avc,alignment=au", "!"] + sink)
+        return [sys.executable, str(Path(__file__).with_name("gst_runner.py")), description, str(self._keyframe_sec)]
 
     def _run_session(self) -> None:
         encoder = self._encoder()
@@ -395,7 +407,7 @@ class KvsStream:
         rc = proc.poll()
         if rc not in (None, 0) and self._want_stream:
             tail = " | ".join(self._gst_tail[-4:])
-            self._last_error = f"gst-launch exited with {rc}: {tail}"
+            self._last_error = f"upload pipeline exited with {rc}: {tail}"
             logger.error(self._last_error)
             if self._auth == "iot" and time.time() - started < 30 and ("credential" in tail.lower() or "403" in tail or "auth" in tail.lower()):
                 logger.warning("Switching to SDK-fetched credentials (KVS_AUTH=token) after an authentication failure")

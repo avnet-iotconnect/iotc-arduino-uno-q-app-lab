@@ -30,6 +30,9 @@ variables:
   - name: KVS_RETENTION_HOURS
     description: "How long Kinesis keeps the video, in hours."
     default_value: 2
+  - name: KVS_KEYFRAME_SEC
+    description: "Seconds between key frames, which is also the fragment length Kinesis serves (2 is a good balance of latency and robustness)."
+    default_value: 2
   - name: KVS_AUTH
     description: "iot = kvssink fetches and refreshes AWS credentials itself from the /IOTCONNECT credentials endpoint with the device certificate (recommended); token = the brick fetches temporary credentials with the /IOTCONNECT SDK and restarts the stream before they expire."
     default_value: iot
