@@ -89,4 +89,8 @@ kvs.status()              # dict for logs or telemetry
   (aarch64). `h264parse` and the LDAP libraries come from Debian's arm64 packages; App Lab's container image is Debian 13
   with GStreamer 1.26, so the plugin versions pinned in `scripts/add_kvs_brick.sh` match it.
 - `x264enc` is not in the App Lab image; on boards without a V4L2 hardware encoder install a software encoder first.
+- The brick asks the Venus encoder for `constrained-baseline` level 4 explicitly. Left to its defaults the encoder writes
+  Level 1.0 into the SPS, which ffmpeg tolerates but browser hardware decoders do not: the player's clock runs and the
+  picture stays black. The key-frame interval is set with the driver's `video_gop_size` control (`h264_i_frame_period`
+  has no effect on this driver).
 - The hardware encoder and the model runner share the board: expect about 10 fps at 640x480 next to YOLOX detection.

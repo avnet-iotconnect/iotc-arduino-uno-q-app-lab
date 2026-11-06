@@ -324,8 +324,15 @@ class KvsStream:
         fps = int(round(self._fps))
         keyframe_period = max(1, fps)  # one key frame per second: kvssink cuts fragments at key frames
         if encoder == "v4l2h264enc":
+            # Ask for constrained-baseline level 4 explicitly: left alone, the Venus encoder stamps Level 1.0 into
+            # the SPS (invalid for 640x480), and browser hardware decoders then show a black picture. The V4L2
+            # controls are the ones the Venus driver exposes (video_gop_size sets the key-frame interval; CBR keeps
+            # the upload near the requested bitrate instead of the driver's 1 Mbit/s VBR default).
             enc = ["videoconvert", "!", "video/x-raw,format=NV12", "!", "videorate", "!", f"video/x-raw,framerate={fps}/1", "!",
-                   "v4l2h264enc", f"extra-controls=controls,video_bitrate={self._bitrate},h264_i_frame_period={keyframe_period}"]
+                   "v4l2h264enc", ("extra-controls=controls,video_bitrate_mode=1,"
+                                   f"video_bitrate={self._bitrate},video_peak_bitrate={self._bitrate * 4 // 3},"
+                                   f"video_gop_size={keyframe_period},h264_i_frame_period={keyframe_period}"),
+                   "!", "video/x-h264,profile=constrained-baseline,level=(string)4"]
         elif encoder == "x264enc":
             enc = ["videoconvert", "!", "videorate", "!", f"video/x-raw,framerate={fps}/1", "!",
                    "x264enc", "tune=zerolatency", "speed-preset=ultrafast", f"bitrate={max(100, self._bitrate // 1000)}", f"key-int-max={keyframe_period}"]
