@@ -256,41 +256,41 @@ Use these /IOTCONNECT-specific guides:
 >`[UQ]` = Arduino UNO Q only (uses the UNO Q's LED matrix or pins). Everything else is in App Lab's `common` catalog on both boards.
 
 - [air-quality-monitoring](app-configs/air-quality-monitoring/README.md) `[DB]`
-- [anomaly-detection](app-configs/anomaly-detection/README.md)
+- [anomaly-detection](app-configs/anomaly-detection/README.md) `[DB]`
 - [audio-classification](app-configs/audio-classification/README.md) `[DB]`
-- [bedtime-story-teller](app-configs/bedtime-story-teller/README.md)
-- [blink](app-configs/blink/README.md)
-- [blink-with-ui](app-configs/blink-with-ui/README.md)
-- [chatbot-cloud-llm](app-configs/chatbot-cloud-llm/README.md)
-- [cloud-blink](app-configs/cloud-blink/README.md)
-- [code-detector](app-configs/code-detector/README.md) `[AH]`
-- [color-your-leds](app-configs/color-your-leds/README.md) `[UQ]`
+- [bedtime-story-teller](app-configs/bedtime-story-teller/README.md) `[DB]`
+- [blink](app-configs/blink/README.md) `[DB]`
+- [blink-with-ui](app-configs/blink-with-ui/README.md) `[DB]`
+- [chatbot-cloud-llm](app-configs/chatbot-cloud-llm/README.md) `[DB]`
+- [cloud-blink](app-configs/cloud-blink/README.md) `[DB]`
+- [code-detector](app-configs/code-detector/README.md) `[DB]` `[AH]`
+- [color-your-leds](app-configs/color-your-leds/README.md) `[DB]` `[UQ]`
 - [edge-ai-assistant](app-configs/edge-ai-assistant/README.md) `[DB]`
-- [edge-dictation-assistant](app-configs/edge-dictation-assistant/README.md) `[VQ]` `[AH]`
-- [edge-speech-assistant](app-configs/edge-speech-assistant/README.md) `[VQ]` `[AH]`
-- [gesture-booth](app-configs/gesture-booth/README.md) `[VQ]` `[AH]`
+- [edge-dictation-assistant](app-configs/edge-dictation-assistant/README.md) `[DB]` `[VQ]` `[AH]`
+- [edge-speech-assistant](app-configs/edge-speech-assistant/README.md) `[DB]` `[VQ]` `[AH]`
+- [gesture-booth](app-configs/gesture-booth/README.md) `[DB]` `[VQ]` `[AH]`
 - [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md) `[DB]` `[AH]`
 - [image-classification](app-configs/image-classification/README.md) `[DB]`
-- [keyword-spotting](app-configs/keyword-spotting/README.md)  `[AH]`
-- [led-matrix-painter](app-configs/led-matrix-painter/README.md)
-- [mascot-jump-game](app-configs/mascot-jump-game/README.md)
-- [mobile-remote-sensor](app-configs/mobile-remote-sensor/README.md) `[AH]`
-- [mobile-video-generic-object-detection](app-configs/mobile-video-generic-object-detection/README.md) `[AH]`
-- [music-composer](app-configs/music-composer/README.md) `[AH]`
+- [keyword-spotting](app-configs/keyword-spotting/README.md) `[DB]`  `[AH]`
+- [led-matrix-painter](app-configs/led-matrix-painter/README.md) `[DB]`
+- [mascot-jump-game](app-configs/mascot-jump-game/README.md) `[DB]`
+- [mobile-remote-sensor](app-configs/mobile-remote-sensor/README.md) `[DB]` `[AH]`
+- [mobile-video-generic-object-detection](app-configs/mobile-video-generic-object-detection/README.md) `[DB]` `[AH]`
+- [music-composer](app-configs/music-composer/README.md) `[DB]` `[AH]`
 - [object-detection](app-configs/object-detection/README.md) `[DB]`
-- [object-hunting](app-configs/object-hunting/README.md) `[AH]`
-- [pose-detection](app-configs/pose-detection/README.md) `[VQ]` `[AH]`
+- [object-hunting](app-configs/object-hunting/README.md) `[DB]` `[AH]`
+- [pose-detection](app-configs/pose-detection/README.md) `[DB]` `[VQ]` `[AH]`
 - [real-time-accelerometer](app-configs/real-time-accelerometer/README.md) `[DB]` `[AH]`
-- [smart-mirror](app-configs/smart-mirror/README.md) `[VQ]` `[AH]`
+- [smart-mirror](app-configs/smart-mirror/README.md) `[DB]` `[VQ]` `[AH]`
 - [system-resources-logger](app-configs/system-resources-logger/README.md) `[DB]`
-- [telegram-bot](app-configs/telegram-bot/README.md)
-- [theremin](app-configs/theremin/README.md) `[AH]`
-- [unoq-pin-toggle](app-configs/unoq-pin-toggle/README.md) `[UQ]`
+- [telegram-bot](app-configs/telegram-bot/README.md) `[DB]`
+- [theremin](app-configs/theremin/README.md) `[DB]` `[AH]`
+- [unoq-pin-toggle](app-configs/unoq-pin-toggle/README.md) `[DB]` `[UQ]`
 - [vibration-anomaly-detection](app-configs/vibration-anomaly-detection/README.md) `[DB]` `[AH]`
 - [video-face-detection](app-configs/video-face-detection/README.md) `[DB]` `[AH]`
 - [video-generic-object-detection](app-configs/video-generic-object-detection/README.md) `[DB]` `[AH]`
 - [video-person-classification](app-configs/video-person-classification/README.md) `[DB]` `[AH]`
-- [weather-forecast](app-configs/weather-forecast/README.md)
+- [weather-forecast](app-configs/weather-forecast/README.md) `[DB]`
 
 ---
 

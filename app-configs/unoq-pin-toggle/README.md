@@ -20,6 +20,8 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `device-template.json` (/IOTCONNECT device template)
 - `config.json` (telemetry/command definitions)
+- `unoq-pin-toggle-dashboard-template.json` (exported /IOTCONNECT dashboard, see below)
+- `dashboard-images/` (the title panel and status images the dashboard shows)
 
 ## Device Template
 Quickstart: use the shared master template at `app-configs/arduino-app-lab-template.json`. It is imported once during onboarding and contains the telemetry fields and commands of every example, so a single device can run all of them.
@@ -29,6 +31,21 @@ Quickstart: use the shared master template at `app-configs/arduino-app-lab-templ
 Optional: `device-template.json` in this folder is a per-example template containing only this app's fields. Import it and bind a separate device to it if you prefer one template per example.
 - Template code: `UnoQUPT`
 - Template name: `UnoQUnoqPinToggle`
+
+## /IOTCONNECT Dynamic Dashboard
+
+Dashboard template file: [unoq-pin-toggle-dashboard-template.json](unoq-pin-toggle-dashboard-template.json)
+
+What it shows: a status image driven by `pin_name` (`LED3`, `LED4`, `LED`, `D13`), the latest `status` and `pin_name`, a latest-values panel, 4 one-click command buttons and a panel for sending any command by hand.
+
+The widgets load their images from `https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/arduino/`, so upload the 5 files in [dashboard-images/](dashboard-images/) to that bucket path before importing (the file names must stay the same).
+
+Import into /IOTCONNECT:
+1. Open /IOTCONNECT and go to **Dashboard**.
+2. Click **Import Dashboard** and upload the JSON file linked above.
+3. Save it and map it to your device. The file is bound to the UNO Q device `unoQ0` on the `arduino`
+   master template; on import, remap it to whichever device on that template runs this example.
+4. Open the dashboard in live mode and run the app: the widgets populate from telemetry.
 
 ## Telemetry Fields
 | Field | Type |

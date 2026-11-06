@@ -23,6 +23,8 @@ App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 - `python/main.py` (/IOTCONNECT-enabled app code)
 - `python/prompt.py` (upstream prompt helper, unchanged)
 - `config.json` (telemetry/command definitions)
+- `smart-mirror-dashboard-template.json` (exported /IOTCONNECT dashboard, see below)
+- `dashboard-images/` (the title panel and status images the dashboard shows)
 - `device-template.json` (per-example device template)
 
 The upstream `python/prompt.yaml` and the `assets/` web UI are used unchanged from your App Lab copy of the example.
@@ -39,6 +41,21 @@ Quickstart: use the shared master template at `app-configs/arduino-app-lab-templ
 Optional: `device-template.json` in this folder is a per-example template containing only this app's fields. Import it and bind a separate device to it if you prefer one template per example.
 - Template code: `VQSM`
 - Template name: `VentunoQSmartMirror`
+
+## /IOTCONNECT Dynamic Dashboard
+
+Dashboard template file: [smart-mirror-dashboard-template.json](smart-mirror-dashboard-template.json)
+
+What it shows: a status image driven by `source` (`web_ui`, `iotconnect`), a gauge of `processing_time_ms`, the latest `response_preview` and `status`, a bar chart of recent `response_chars`, a latest-values panel, a one-click command button and a panel for sending any command by hand.
+
+The widgets load their images from `https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/arduino/`, so upload the 3 files in [dashboard-images/](dashboard-images/) to that bucket path before importing (the file names must stay the same).
+
+Import into /IOTCONNECT:
+1. Open /IOTCONNECT and go to **Dashboard**.
+2. Click **Import Dashboard** and upload the JSON file linked above.
+3. Save it and map it to your device. The file is bound to the VENTUNO Q device `ventunoQ0` on the `arduino`
+   master template; on import, remap it to whichever device on that template runs this example.
+4. Open the dashboard in live mode and run the app: the widgets populate from telemetry.
 
 ## Telemetry Fields
 | Field | Type |
