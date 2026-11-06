@@ -16,6 +16,15 @@ from arduino.app_peripherals.camera import WebSocketCamera
 # ---- IOTCONNECT Relay (App Lab TCP bridge) ----
 from iotc_relay_client import IoTConnectRelayClient
 
+# ---- /IOTCONNECT Video Streaming (optional) ----
+# With the KVS brick installed (scripts/add_kvs_brick.sh <app>) the camera is also streamed to the device's
+# Video Streaming tab in /IOTCONNECT and to the App Lab Cloud Console. Without the brick this does nothing.
+try:
+    from kvs import KvsStream
+    kvs_stream = KvsStream()
+except ImportError:
+    kvs_stream = None
+
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "mobile_video_object_detection"
 UNOQ_DEMO_NAME = "mobile-video-generic-object-detection"

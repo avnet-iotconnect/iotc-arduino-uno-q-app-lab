@@ -212,6 +212,20 @@ App.run(user_loop=loop)
 [`examples/iotconnect-blink`](examples/iotconnect-blink/README.md) is a complete app built this way. Make sure the
 device template contains the attributes and commands your app uses (the master template covers the examples here).
 
+### Live video from the camera examples (KVS brick)
+
+[`bricks/kvs`](bricks/kvs/README.md) streams the camera of an app to **/IOTCONNECT Video Streaming** (AWS Kinesis
+Video Streams): it takes the frames the video detection runner already decodes, encodes them with the board's
+hardware H.264 encoder and uploads with the AWS KVS producer. Enable Video Streaming on the device template, then
+
+```bash
+bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_kvs_brick.sh <APP_LAB_FOLDER>
+```
+
+The camera examples below (`video-generic-object-detection`, `video-face-detection`, `video-person-classification`,
+`object-hunting`, `mobile-video-generic-object-detection`) already create the brick when it is installed; the stream
+shows on the device's Video Streaming tab and in the App Lab Cloud Console while the app runs.
+
 ### Option B: copy a ready-made example
 
 In Arduino App Lab:

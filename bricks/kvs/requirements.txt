@@ -1,0 +1,2 @@
+iotconnect-sdk-lite>=1.2.0,<2.0
+websockets>=12

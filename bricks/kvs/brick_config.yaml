@@ -1,0 +1,36 @@
+id: kvs
+name: KVS Video Stream (/IOTCONNECT)
+description: "Streams the app's camera to /IOTCONNECT Video Streaming (AWS Kinesis Video Streams): the frames the video detection runner already decodes are encoded by the board's hardware H.264 encoder and uploaded with the AWS KVS producer (kvssink). Apps without a video runner hand frames over with push_frame()."
+category: miscellaneous
+variables:
+  - name: KVS_CREDENTIALS_DIR
+    description: "Folder with iotcDeviceConfig.json, device-cert.pem and device-pkey.pem (the /IOTCONNECT device identity). /app is the app folder inside the container; data/iotconnect is used when this folder has no credentials."
+    default_value: /app/data/kvs
+  - name: KVS_LIBS_DIR
+    description: "Folder with the KVS producer GStreamer plugin and its libraries, filled by scripts/add_kvs_brick.sh."
+    default_value: /app/data/kvs/libs
+  - name: KVS_SOURCE
+    description: "auto = the frames of the app's video runner (video_object_detection / video_image_classification bricks); push = frames the app hands over with push_frame()."
+    default_value: auto
+  - name: KVS_FPS
+    description: "Frames per second sent to the stream."
+    default_value: 10
+  - name: KVS_BITRATE
+    description: "H.264 bitrate in bits per second."
+    default_value: 600000
+  - name: KVS_AUTOSTART
+    description: "true = stream from the moment the app starts; false = wait for start_stream()."
+    default_value: true
+  - name: KVS_STREAM_NAME
+    description: "Kinesis stream name. auto = the device's /IOTCONNECT client id, which is the stream the portal's Video Streaming tab plays."
+    default_value: auto
+  - name: KVS_REGION
+    description: "AWS region of the Kinesis Video stream."
+    default_value: us-east-1
+  - name: KVS_RETENTION_HOURS
+    description: "How long Kinesis keeps the video, in hours."
+    default_value: 2
+  - name: KVS_AUTH
+    description: "iot = kvssink fetches and refreshes AWS credentials itself from the /IOTCONNECT credentials endpoint with the device certificate (recommended); token = the brick fetches temporary credentials with the /IOTCONNECT SDK and restarts the stream before they expire."
+    default_value: iot
+    hidden: true

@@ -19,6 +19,15 @@ import json
 # ---- /IOTCONNECT brick (bricks/iotconnect, see bricks/iotconnect/README.md) ----
 from iotconnect import IoTConnect
 
+# ---- /IOTCONNECT Video Streaming (optional) ----
+# With the KVS brick installed (scripts/add_kvs_brick.sh <app>) the camera is also streamed to the device's
+# Video Streaming tab in /IOTCONNECT and to the App Lab Cloud Console. Without the brick this does nothing.
+try:
+    from kvs import KvsStream
+    kvs_stream = KvsStream()
+except ImportError:
+    kvs_stream = None
+
 UNOQ_DEMO_NAME = "object-hunting"
 IOTC_INTERVAL_SEC = 5
 IOTC_LAST_SEND = 0.0

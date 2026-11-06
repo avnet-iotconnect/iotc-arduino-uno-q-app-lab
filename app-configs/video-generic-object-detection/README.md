@@ -107,4 +107,8 @@ Import into /IOTCONNECT:
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in /IOTCONNECT, re-create the device or update it to match these fields.
 
+## Live video (KVS brick)
 
+With the [KVS brick](../../bricks/kvs/README.md) installed (`bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_kvs_brick.sh <APP_LAB_FOLDER>`)
+and Video Streaming enabled on the device template, this example also streams the camera to /IOTCONNECT Video
+Streaming (Kinesis Video Streams). `main.py` creates the brick when it is present and runs unchanged without it.
