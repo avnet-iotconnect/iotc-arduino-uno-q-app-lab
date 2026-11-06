@@ -223,8 +223,10 @@ bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_kvs_brick.sh <APP_LAB
 ```
 
 The camera examples below (`video-generic-object-detection`, `video-face-detection`, `video-person-classification`,
-`object-hunting`, `mobile-video-generic-object-detection`) already create the brick when it is installed; the stream
-shows on the device's Video Streaming tab and in the App Lab Cloud Console while the app runs.
+`object-hunting`, `mobile-video-generic-object-detection`, and `smart-mirror` on the VENTUNO Q) already create the
+brick when it is installed; the stream shows on the device's Video Streaming tab and in the App Lab Cloud Console while
+the app runs. A device created before video streaming was enabled on its template streams through a companion device
+`<device>cam` (`add_kvs_brick.sh <APP_LAB_FOLDER> --creds-from <folder with its credentials>`), see the brick README.
 
 ### Option B: copy a ready-made example
 

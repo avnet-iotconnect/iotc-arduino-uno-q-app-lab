@@ -153,6 +153,10 @@ class KvsStream:
         self._overlay_lock = threading.Lock()
         self._font: Any = None
         self._font_size = 0
+        keep = _env("KVS_KEEP_ONLINE", "auto").strip().lower()
+        self._keep_online_mode = keep if keep in ("auto", "true", "false") else "auto"
+        self._mqtt: Any = None
+        self._mqtt_announced = False
         self._auth = _env("KVS_AUTH", "iot").strip().lower()
         if self._auth not in ("iot", "token"):
             self._auth = "iot"
@@ -257,6 +261,12 @@ class KvsStream:
         self._running = False
         self._want_stream = False
         self._end_session()
+        client, self._mqtt = self._mqtt, None
+        if client is not None:
+            try:
+                client.disconnect()
+            except Exception:  # noqa: BLE001
+                pass
 
     def loop(self) -> None:
         """One streaming session per iteration; waits while streaming is not wanted."""
@@ -264,7 +274,7 @@ class KvsStream:
             time.sleep(_TICK_S)
             return
         if not self._ready():
-            time.sleep(_RETRY_S)
+            self._nap(_RETRY_S)
             return
         try:
             self._run_session()
@@ -273,14 +283,73 @@ class KvsStream:
             logger.error(f"Stream session failed: {exc}")
         self._set_streaming(False)
         if self._running and self._want_stream:
-            time.sleep(_RETRY_S)
+            self._nap(_RETRY_S)
+
+    def _nap(self, seconds: float) -> None:
+        """Sleeps in short steps so the app framework can stop the brick promptly."""
+        end = time.time() + seconds
+        while self._running and time.time() < end:
+            time.sleep(_TICK_S)
 
     @brick.loop
     def _watch_state(self) -> None:
         streaming = self.is_streaming()
         if streaming != self._was_streaming:
             self._set_streaming(streaming)
-        time.sleep(1.0)
+        self._nap(1.0)
+
+    @brick.loop
+    def _keep_online(self) -> None:
+        """Keeps the brick's device connected to /IOTCONNECT over MQTT when it is a companion camera device:
+        the portal only serves playback for devices it sees as connected. Never used when the brick's device
+        is the app's own device (the app, the /IOTCONNECT brick or the relay already hold that session)."""
+        if not self._running or not self._online_wanted():
+            self._nap(2.0)
+            return
+        client = self._mqtt
+        try:
+            if client is None:
+                from avnet.iotconnect.sdk.lite import Callbacks, Client, ClientSettings, DeviceConfig
+
+                cfg = DeviceConfig.from_iotc_device_config_json_file(
+                    device_config_json_path=str(self._config_path), device_cert_path=str(self._cert_path), device_pkey_path=str(self._key_path)
+                )
+                client = Client(config=cfg, callbacks=Callbacks(disconnected_cb=self._on_mqtt_disconnect),
+                                settings=ClientSettings(verbose=False, connect_timeout_secs=20, connect_tries=3))
+                self._mqtt = client
+            if not client.is_connected():
+                client.connect()
+                if client.is_connected() and not self._mqtt_announced:
+                    self._mqtt_announced = True
+                    logger.info(f"Device {self.stream_name or self._config_path.stem} is online in /IOTCONNECT (companion camera device)")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"Could not keep the camera device online: {exc}")
+            self._nap(30.0)
+            return
+        self._nap(5.0)
+
+    def _on_mqtt_disconnect(self, reason: str, from_server: bool) -> None:
+        self._mqtt_announced = False
+        logger.info(f"Camera device MQTT session dropped ({reason}); reconnecting")
+
+    def _online_wanted(self) -> bool:
+        if self._keep_online_mode == "true":
+            return True
+        if self._keep_online_mode == "false":
+            return False
+        return self._is_companion_device()
+
+    def _is_companion_device(self) -> bool:
+        """True when the brick's credentials belong to a different device than the app's own /IOTCONNECT
+        identity in data/iotconnect (the companion camera device setup, see README)."""
+        own = self._creds_dir.parent / "iotconnect" / CONFIG_FILE
+        if self._creds_dir == own.parent or not own.is_file() or not self._config_path.is_file():
+            return False
+        try:
+            with open(own, encoding="utf-8") as f1, open(self._config_path, encoding="utf-8") as f2:
+                return json.load(f1).get("uid") != json.load(f2).get("uid")
+        except (OSError, ValueError):
+            return False
 
     # --- internals ---
 
@@ -310,6 +379,9 @@ class KvsStream:
                         + ("enabled" if self._identity.get("vs_url") else "NOT enabled in the device template"))
         if not self._identity.get("vs_url"):
             self._last_error = "Video streaming is not enabled for this device's template in /IOTCONNECT"
+            # re-read the identity every minute: streaming may be switched on in the portal while the app runs
+            if time.time() - self._identity.get("read_at", 0.0) > 60:
+                self._identity = None
             return False
         return True
 
@@ -328,6 +400,7 @@ class KvsStream:
             "vs_url": getattr(vs, "url", "") or "",
             "auto_start": bool(getattr(vs, "as_", True)),
             "dra": dra,
+            "read_at": time.time(),
         }
 
     def _fetch_token(self) -> dict[str, str]:

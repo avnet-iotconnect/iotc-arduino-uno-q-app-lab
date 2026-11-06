@@ -4,7 +4,7 @@ Streams the camera of an Arduino App Lab app to **/IOTCONNECT Video Streaming** 
 The stream shows up on the device's **Video Streaming** tab in /IOTCONNECT and on the
 [App Lab Cloud Console](https://avnet-qpet-leaderboard.s3.us-east-1.amazonaws.com/console/index.html) while the
 app runs. Verified on the Arduino UNO Q with the Detect Objects on Camera, Face Detector on Camera, Person
-classifier on camera and Object Hunting examples.
+classifier on camera and Object Hunting examples, and on the Arduino VENTUNO Q with Smart Mirror.
 
 ## How it works
 
@@ -60,6 +60,7 @@ classifier on camera and Object Hunting examples.
 | `KVS_RETENTION_HOURS` | `2` | how long Kinesis keeps the video |
 | `KVS_KEYFRAME_SEC` | `1` | key-frame interval = fragment length (1 for lowest latency, 2 for robustness) |
 | `KVS_OVERLAY` | `true` | draw the runner's detections on the uploaded frames |
+| `KVS_KEEP_ONLINE` | `auto` | hold an MQTT session for a companion camera device (see below); `true`/`false` force it |
 | `KVS_CREDENTIALS_DIR` | `/app/data/kvs` | device identity files (falls back to `/app/data/iotconnect`) |
 | `KVS_LIBS_DIR` | `/app/data/kvs/libs` | `kvssink` and its libraries |
 
@@ -89,6 +90,25 @@ seconds in the App Lab Cloud Console (its player keeps 2 s of buffer and catches
 a bit more in the /IOTCONNECT portal, whose player buffers on its own. `KVS_KEYFRAME_SEC=2` trades latency for
 robustness on a weak network. Sub-second latency would need the WebRTC flavour of /IOTCONNECT video streaming, which
 is a different device pipeline.
+
+## Devices created before video streaming was enabled (companion camera device)
+
+/IOTCONNECT gives a device its Kinesis stream resource when the device is created. Enabling Video Streaming on the
+template later and editing the device did not give an existing device the resource in our account (the device
+identity never gets the `vs` credentials block and `client-streaming-url` stays empty), so for such a device create
+a **second device on the same template with video streaming on**, named `<device>cam` (`ventunoQ0cam` for the
+workshop's VENTUNO Q), download its certificate and point the brick at it:
+
+```bash
+mkdir -p ~/.iotconnect-cam   # iotcDeviceConfig.json, device-cert.pem, device-pkey.pem of <device>cam
+bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_kvs_brick.sh <APP_LAB_FOLDER> --creds-from ~/.iotconnect-cam
+```
+
+The app keeps talking to /IOTCONNECT as itself; only the video goes out as `<device>cam`. The portal serves playback
+only for devices it sees connected, so when the brick's credentials belong to a different device than the app's own
+(`data/kvs` and `data/iotconnect` name different devices) it also holds an MQTT session for the camera device
+(`KVS_KEEP_ONLINE=auto`). The App Lab Cloud Console looks for `<device>cam` automatically when `<device>` has no
+stream; in the portal, open the camera device's **Video Streaming** tab.
 
 ## Watching the stream
 

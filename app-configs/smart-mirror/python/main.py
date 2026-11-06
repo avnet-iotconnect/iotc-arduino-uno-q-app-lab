@@ -23,6 +23,18 @@ from arduino.app_utils.image import compressed_to_jpeg
 # ---- /IOTCONNECT brick ----
 from iotconnect import IoTConnect
 
+# ---- /IOTCONNECT Video Streaming (optional) ----
+# With the KVS brick installed (scripts/add_kvs_brick.sh <app>) the camera is also streamed to the device's
+# Video Streaming tab in /IOTCONNECT and to the App Lab Cloud Console. This app owns the camera, so it hands
+# frames to the brick itself (push mode). Without the brick this does nothing.
+try:
+    from kvs import KvsStream
+
+    kvs_stream = KvsStream(source="push")
+except ImportError:
+    kvs_stream = None
+kvs_frame_counter = [0]
+
 UNOQ_DEMO_NAME = "smart-mirror"
 MODEL_NAME = "vlm"
 PREVIEW_CHARS = 200
@@ -148,6 +160,10 @@ def loop():
     frame_bytes = frame.tobytes()
     with frame_lock:
         current_frame = frame_bytes
+    if kvs_stream is not None:
+        kvs_frame_counter[0] += 1
+        if kvs_frame_counter[0] % 3 == 0:  # about 10 of the 30 captured frames per second go to the stream
+            kvs_stream.push_frame(frame_bytes)
 
 
 ui.expose_api("GET", "/stream", video_stream)

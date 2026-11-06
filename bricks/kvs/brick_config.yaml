@@ -36,6 +36,9 @@ variables:
   - name: KVS_OVERLAY
     description: "true = draw the video runner's detections (boxes, labels, confidence) on the uploaded frames; false = raw camera frames."
     default_value: true
+  - name: KVS_KEEP_ONLINE
+    description: "Keep the brick's device connected to /IOTCONNECT over MQTT so the portal serves its playback (the portal only plays streams of connected devices). auto = only for a companion camera device (credentials of another device than the app's own in data/iotconnect); never for the app's own device, whose session the app or the relay holds."
+    default_value: auto
   - name: KVS_AUTH
     description: "iot = kvssink fetches and refreshes AWS credentials itself from the /IOTCONNECT credentials endpoint with the device certificate (recommended); token = the brick fetches temporary credentials with the /IOTCONNECT SDK and restarts the stream before they expire."
     default_value: iot

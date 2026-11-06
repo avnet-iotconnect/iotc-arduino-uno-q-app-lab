@@ -97,6 +97,25 @@ Each completed scan produces one message. `source` is `web_ui` (the **Scan your 
    `arduino-app-cli model install genie:qwen3_vl_4b_instruct`.
 5) Run the app, open `<board-name>.local:7000`, tap **Scan your look** and verify the telemetry in /IOTCONNECT.
 
+## Live video (KVS brick)
+
+With the [KVS brick](../../bricks/kvs/README.md) installed, this example also streams the mirror camera to /IOTCONNECT
+Video Streaming (Kinesis Video Streams) and to the App Lab Cloud Console. The app owns the camera (there is no video
+detection runner here), so `main.py` hands every third captured frame to the brick itself (`KvsStream(source="push")`,
+about 10 frames per second); without the brick it runs unchanged.
+
+The workshop's VENTUNO Q device `ventunoQ0` was created before video streaming was enabled on the template, so the
+video goes out through a companion device `ventunoQ0cam` (same template, video streaming on), whose credentials live in
+`~/.iotconnect-cam` on the board:
+
+```bash
+bash /home/arduino/iotc-arduino-uno-q-workshop/scripts/add_kvs_brick.sh <APP_LAB_FOLDER> --creds-from ~/.iotconnect-cam
+```
+
+The brick keeps `ventunoQ0cam` connected while the app runs (the portal only plays streams of connected devices). Watch
+it on that device's **Video Streaming** tab or in the console's **Live video** panel of the `ventunoQ0` card, which
+falls back to `ventunoQ0cam` by itself. Expect 3 to 4 seconds of delay in the console (HLS).
+
 ## Notes
 - The VLM runs entirely on the VENTUNO Q; the first scan after startup can take a while as the model loads.
 - Telemetry is sent only when a scan completes, so you will not see data until someone scans (from the page or with `scan-look`).
